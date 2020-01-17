@@ -13,8 +13,9 @@ public class Test1 {
     }
 
     public static String replaceSpace(StringBuffer str) {
-        for(int i=0;i<str.length();i++){
-            if (str.charAt(i).)
+        for (int i = 0; i < str.length(); i++) {
+            //if (str.charAt(i))
         }
         return "";
     }
+}

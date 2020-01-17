@@ -106,6 +106,7 @@ public class AESUtils {
             IvParameterSpec ivspec = new IvParameterSpec(ivbyte);
             cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
             byte[] original = cipher.doFinal(encrypted1);
+            System.out.println(StringTest.bytesToHexString(original));
             return new String (original);
         }
         catch (Exception e) {
@@ -120,21 +121,13 @@ public class AESUtils {
         String out = "{\"Addr\":\"190312001390\",\"NoticeType\":\"01\",\"Type\":\"00\",\"RegularData\":\"000000.00,000000.00,0869662038524333,000000,20990228012237,29,3.7,00\"}";
         // 带解密密文
         //String in = "636B128BC9115CB8E5AB79C54238BEF5367C1CF62A0EEBFE06C06337D2D7C576A2FDFA4CDD43B81190D1F3B24E21D893F85806CE4C39D5A3BD5AAF5BF9E2784344C8C278BC9701586EC103AC8DAF1F6C6B577CFD8361E17991CA5C7F50E940FDB4DF85821DE9222821A8F33DAEA054D1C6190BF1EF985A98F36C7A13315EA986AAC12ABEC09F192C7451989780ECD084";
-        String in = "7B 22 41 64 64 72 22 3A 22 31 39 30 33 31 32 30 30 31 33 39 30 22 2C 22 4E 6F 74 69 63 65 54 79 " +
-                "70 65 22 3A 22 30 31 22 2C 22 54 79 70 65 22 3A 22 30 30 22 2C 22 52 65 67 75 6C 61 72 44 61 74 " +
-                "61 22 3A 22 30 30 30 30 30 30 2E 30 30 2C 30 30 30 30 30 30 2E 30 30 2C 30 38 36 39 36 36 32 30 " +
-                "33 38 35 32 34 33 33 33 2C 30 30 30 30 30 30 2C 32 30 39 39 30 32 32 38 30 31 32 32 33 37 2C 32 " +
-                "39 2C 33 2E 37 2C 30 30 22 7D";
+        String in = "636B128BC9115CB8E5AB79C54238BEF580728F1BABF872BF65A88A7298C4D1990453C0B33697A1F18EA5193E1D33A8FEB8DB7F045A48EC5E8FCE8E41D22BD5B0";
         // 加密
 //        String security = encryptAEX(out);
 //        System.out.println("密文："+ security);
 //        //解密
-//        String end = desEncryptAEX(in);
-//        System.out.println("明文："+end);
-
-        //
-        String test = StringTest.hexStringToString(in);
-        System.out.println(test);
+        String end = desEncryptAEX(in);
+        System.out.println("明文："+end);
 
     }
 
