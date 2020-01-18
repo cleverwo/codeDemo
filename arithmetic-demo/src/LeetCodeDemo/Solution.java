@@ -1,9 +1,5 @@
 package LeetCodeDemo;
 
-import sun.security.util.Length;
-
-import java.util.Arrays;
-
 /**
  * @Auther: wangzhendong
  * @Date: 2020/1/15 16:37

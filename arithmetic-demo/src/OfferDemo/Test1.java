@@ -1,4 +1,4 @@
-package arrayDemo;
+package OfferDemo;
 
 
 /**

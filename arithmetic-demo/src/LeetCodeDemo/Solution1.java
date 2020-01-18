@@ -1,8 +1,5 @@
 package LeetCodeDemo;
 
-import sun.security.util.Length;
-
-import javax.sound.midi.MidiChannel;
 import java.util.Arrays;
 
 /**
