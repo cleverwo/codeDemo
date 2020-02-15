@@ -17,8 +17,6 @@ public class Test {
         int[][] arr3 = new int[5][];//五行的长度
         for(int i=0; i<arr3.length; ++i){
             arr3[i]=new int[i+1];   //列的长度每次都变化。每次都要重新申请空间(长度)
-            for(int j=0; j<arr3[i].length; ++j)
-                arr3[i][j]= i+j;
         }
     }
 }

@@ -1,5 +1,7 @@
 package OfferDemo;
 
+import OfferDemo.node.ListNode;
+
 import java.util.*;
 
 /**
@@ -33,14 +35,5 @@ public class Test3 {
         }
         ArrayList list = printListFromTailToHead(home);
         System.out.println(list.toString());
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next = null;
-
-    ListNode(int val) {
-        this.val = val;
     }
 }

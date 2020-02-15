@@ -3,6 +3,8 @@ package OfferDemo;
 
 import java.util.HashMap;
 
+import OfferDemo.node.TreeNode;
+
 /**
  * @Auther: 10413
  * @Date: 2020/1/22 00:12
@@ -59,15 +61,5 @@ public class Test4 {
             System.out.print(t.val + " ");
             InOrder(t.right);
         }
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
     }
 }
