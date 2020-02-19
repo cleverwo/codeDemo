@@ -1,9 +1,4 @@
-package com.example;
-
-import com.example.test1.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.test2;
 
 /**
  * @Auther: 10413

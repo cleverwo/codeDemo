@@ -1,4 +1,4 @@
-package com.example;
+package com.example.test1.method3;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

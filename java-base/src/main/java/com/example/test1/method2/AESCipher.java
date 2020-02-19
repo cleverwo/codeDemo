@@ -1,12 +1,10 @@
-package com.example.test2;
+package com.example.test1.method2;
 
-import com.example.StringTest;
-import com.example.test1.AES;
+import com.example.test2.StringTest;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;

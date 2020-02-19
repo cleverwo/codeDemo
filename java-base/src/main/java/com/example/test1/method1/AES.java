@@ -17,7 +17,7 @@
  */
 
 
-package com.example.test1;
+package com.example.test1.method1;
 
 import com.example.test1.encoding.Base16;
 
