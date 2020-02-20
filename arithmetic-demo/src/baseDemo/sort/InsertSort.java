@@ -8,11 +8,6 @@ import java.util.Arrays;
  * @Description: 插入排序
  */
 public class InsertSort {
-    public static void main(String[] args) {
-        int[] a = {5,3,4,8,1,9,2};
-        insertSort2(a);
-        System.out.println(Arrays.toString(a));
-    }
 
     /**
      * 快速排序
@@ -50,6 +45,12 @@ public class InsertSort {
             }
             array[j+1] = insertValue;
         }
+    }
+
+    public static void main(String[] args) {
+        int[] a = {5,3,4,8,1,9,2};
+        insertSort2(a);
+        System.out.println(Arrays.toString(a));
     }
 
 }

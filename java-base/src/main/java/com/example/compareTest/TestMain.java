@@ -26,5 +26,8 @@ public class TestMain {
         list.add(t5);
         Collections.sort(list);
         System.out.println(list.toString());
+
+
+        System.out.println((2+4)>>1);
     }
 }
