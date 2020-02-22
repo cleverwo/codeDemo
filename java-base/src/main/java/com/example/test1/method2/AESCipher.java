@@ -1,6 +1,6 @@
 package com.example.test1.method2;
 
-import com.example.test2.StringTest;
+import com.example.test1.StringTest;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;

@@ -1,7 +1,6 @@
-package com.example.test2;
+package com.example.test1;
 
 
-import com.example.test1.encoding.Base64;
 import sun.misc.BASE64Decoder;
 
 import java.io.UnsupportedEncodingException;
@@ -10,6 +9,7 @@ import java.io.UnsupportedEncodingException;
  * @Auther: wangzhendong
  * @Date: 2020/1/8 16:22
  * @Description:
+ * String 方法
  */
 public class StringTest {
 

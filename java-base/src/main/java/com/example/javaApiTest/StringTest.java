@@ -1,4 +1,4 @@
-package stringDemo;
+package com.example.javaApiTest;
 
 
 import java.util.concurrent.CountDownLatch;

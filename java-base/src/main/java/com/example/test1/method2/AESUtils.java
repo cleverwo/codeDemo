@@ -1,6 +1,6 @@
 package com.example.test1.method2;
 
-import com.example.test2.StringTest;
+import com.example.test1.StringTest;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
