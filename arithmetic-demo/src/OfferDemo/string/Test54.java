@@ -64,7 +64,6 @@ public class Test54 {
      * 上面是对string stream的处理有问题，不用队列存了，我用数组
      */
     ArrayList<Character> list = new ArrayList<>();
-
     public void Insert_0(char ch) {
         list.add(ch);
     }
