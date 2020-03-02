@@ -5,7 +5,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Auther: wangzhendong
  * @Date: 2019/7/12 16:36
- * @Description: 遇到异常不捕获 锁就会被释放
+ * @Description:
+ * 遇到异常不捕获 锁就会被释放
  * 加锁时不要对字符串常量进行加锁
  */
 public class SyncTest5 {

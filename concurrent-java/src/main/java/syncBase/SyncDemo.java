@@ -3,7 +3,10 @@ package syncBase;
 /**
  * @Auther: wangzhendong
  * @Date: 2019/7/12 14:19
- * @Description: synchronized 关键字基本应用
+ * @Description:
+ * synchronized 关键字基本应用
+ * 1，静态方法枷锁
+ * 2.方法区枷锁
  * synchronized  对对象加锁 同步方法
  */
 public class SyncDemo {
@@ -69,6 +72,15 @@ public class SyncDemo {
             }
             System.out.println(Thread.currentThread().getName() + " count2 "+ count2);
         }
+    }
+    public static synchronized void m2(){ //相当于锁定 T。class
+        count2--;
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + " count2 "+ count2);
     }
 
 

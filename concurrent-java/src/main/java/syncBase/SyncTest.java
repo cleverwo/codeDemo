@@ -3,13 +3,14 @@ package syncBase;
 /**
  * @Auther: wangzhendong
  * @Date: 2019/7/12 16:16
- * @Description: 简单的synchronize关键字应用
- * 多线程访问共享资源
- * 同步访问 count值
+ * @Description:
+ * 简单的synchronize关键字应用
+ * 多线程访问共享资源 同步访问 count值
  */
 public class SyncTest implements Runnable {
     private int count = 10;
 
+    // 加synchronized 时同步count；
     @Override
     public /*synchronized*/ void run() {
         count--;

@@ -5,7 +5,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Auther: wangzhendong
  * @Date: 2019/7/12 16:24
- * @Description: synchronized 对读写机制的操作
+ * @Description:
+ * synchronized 对读写机制的操作
  * 不对读加锁导致的脏读问题
  */
 public class SyncTest3 {
