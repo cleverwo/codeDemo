@@ -1,4 +1,4 @@
-package syncBase;
+package container;
 
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -6,7 +6,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Auther: wangzhendong
  * @Date: 2019/6/10 18:23
- * @Description: 消费者生产者容器 利用synchronized+ wait + notify创建容器
+ * @Description:
+ * 消费者生产者容器 利用synchronized+ wait + notify创建容器
  *
  * 定义了容器lists 最大容量是10 当前容量为count
  * put 为生产  get为消费
@@ -19,6 +20,7 @@ public class MyContainer<T> {
     private int count = 0; //当前容量
 
     // wait 和 while 一起使用
+    // 这里用while 是当线程被唤醒时重复检查size的大小，防止其他线程唤醒时在添加咋成越界异常
     public synchronized void put(T t){
         System.out.println(Thread.currentThread().getName()+ " start");
         while (lists.size() == MAX){

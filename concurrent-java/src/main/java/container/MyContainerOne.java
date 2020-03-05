@@ -1,4 +1,4 @@
-package volatileBase;
+package container;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  *  latch 的优点是不用加锁，只涉及通信 用synchronize + wait 处理太繁琐，
  *  可以用countdownlatch /cyclicbarrier/semaphore 处理
  */
-public class MyContainerTest1 {
+public class MyContainerOne {
 
     //volatile 共享关键字
     volatile List<Integer> count = new ArrayList<>();
@@ -34,8 +34,8 @@ public class MyContainerTest1 {
     }
 
     public static void main(String[] args){
-      // solution1();
-       solution2();
+        solution1();
+       //solution2();
        //solution3();
 
     }
@@ -44,7 +44,7 @@ public class MyContainerTest1 {
      * volatile 关键字控制多线程访问相同关键字
      */
     public static void solution1(){
-        MyContainerTest1 t = new MyContainerTest1();
+        MyContainerOne t = new MyContainerOne();
 
         /* volatile 共享字段 */
         new Thread(()->{
@@ -74,7 +74,7 @@ public class MyContainerTest1 {
      * wait 释放锁，notify/notifyAll不释放锁
      */
     public static void solution2() {
-        MyContainerTest1 t = new MyContainerTest1();
+        MyContainerOne t = new MyContainerOne();
         /*
         synchronized + wait/notify
         */
@@ -146,7 +146,7 @@ public class MyContainerTest1 {
      * countdownlatch/cyclicbarrier/semaphore
      */
     public static void solution3(){
-        MyContainerTest1 t = new MyContainerTest1();
+        MyContainerOne t = new MyContainerOne();
         CountDownLatch latch = new CountDownLatch(1);
         new Thread(()->{
             System.out.println("b1 开始");

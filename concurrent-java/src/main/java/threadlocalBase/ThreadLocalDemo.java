@@ -7,7 +7,10 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2019/6/11 20:20
  * @Description:
  * ThreadLocal 是线程中的局部变量
- * 是用空间换时间
+ * 是用空间换时间，synchronized是时间换空间
+ * 线程局部变量时，当前线程的改变不会造成其他形成的影响
+ *
+ * ThreadLocal 会造成内存泄漏
  *
  */
 public class ThreadLocalDemo {

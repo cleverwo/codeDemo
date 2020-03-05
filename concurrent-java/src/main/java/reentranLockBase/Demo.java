@@ -101,6 +101,9 @@ public class Demo {
         }
     }
 
+    /**
+     * reentrantLock是公平锁，synchronized是非公平锁
+     */
     void aa(){
         for (int i = 0; i<10;i++){
             lock2.lock();
