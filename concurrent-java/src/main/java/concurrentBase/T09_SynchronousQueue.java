@@ -1,7 +1,6 @@
 package concurrentBase;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.SynchronousQueue;
 
 /**

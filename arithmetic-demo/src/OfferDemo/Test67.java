@@ -107,6 +107,6 @@ public class Test67 {
 
     public static void main(String[] args) {
         Test67 t = new Test67();
-        System.out.println(t.cutRope2(18));
+        System.out.println(t.cutRope2(12));
     }
 }

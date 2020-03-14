@@ -1,4 +1,6 @@
-package LeetCodeDemo;
+package LeetCodeDemo.array;
+
+import LeetCodeDemo.Solution;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ import java.util.HashMap;
  * 因为 nums[0] + nums[1] = 2 + 7 = 9
  * 所以返回 [0, 1]
  */
-public class Solution4 {
+public class Solution1 {
 
     /**
      * 暴力法 时间：O(n²) 空间：O(1)
@@ -33,6 +35,7 @@ public class Solution4 {
         return null;
     }
 
+
     /**
      * 一遍哈希表
      * 为了对运行时间复杂度进行优化，我们需要一种更有效的方法来检查数组中是否存在目标元素。
@@ -40,7 +43,6 @@ public class Solution4 {
      * 通过以空间换取速度的方式，我们可以将查找时间从 O(n)降低到 O(1)。
      * 哈希表正是为此目的而构建的，它支持以 近似 恒定的时间进行快速查找。
      * 我用“近似”来描述，是因为一旦出现冲突，查找用时可能会退化到 O(n)。
-     * //TODO 哈希表的原理？？
      * 但只要你仔细地挑选哈希函数，在哈希表中进行查找的用时应当被摊销为 O(1)。
      * @return
      */
@@ -77,8 +79,9 @@ public class Solution4 {
     }
 
     public static void main(String[] args) {
+        Solution1 s = new Solution1();
         int[] a = {2,7,11,12};
-        int[] result = twoSum3(a,9);
+        int[] result = twoSum(a,9);
         System.out.println(Arrays.toString(result));
     }
 }

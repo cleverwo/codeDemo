@@ -1,5 +1,7 @@
 package ThreadPool;
 
+import java.util.concurrent.Callable;
+
 /**
  * @Auther: 10413
  * @Date: 2020/3/4 15:59
@@ -12,4 +14,14 @@ package ThreadPool;
  *
  */
 public class T03_Callable {
+
+    public static void main(String[] args) {
+
+        Callable<Integer> callable = new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return null;
+            }
+        };
+    }
 }
