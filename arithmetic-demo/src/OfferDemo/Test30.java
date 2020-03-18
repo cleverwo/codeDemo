@@ -1,4 +1,4 @@
-package OfferDemo.array;
+package OfferDemo;
 
 /**
  * @Auther: 10413

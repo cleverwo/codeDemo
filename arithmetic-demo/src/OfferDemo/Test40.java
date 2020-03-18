@@ -1,4 +1,4 @@
-package OfferDemo.array;
+package OfferDemo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

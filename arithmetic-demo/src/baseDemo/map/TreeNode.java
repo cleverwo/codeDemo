@@ -1,15 +1,15 @@
-package baseDemo.tree;
+package baseDemo.map;
 
 /**
  * @Auther: 10413
- * @Date: 2020/1/27 11:30
+ * @Date: 2020/3/17 15:13
  * @Description:
  */
 public class TreeNode {
-    public int val;
+    public Character val;
     public TreeNode lchild,rchild;
 
-    public TreeNode(int val){
+    public TreeNode(Character val){
         this.val = val;
     }
 }

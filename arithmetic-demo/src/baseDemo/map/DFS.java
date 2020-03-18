@@ -1,10 +1,8 @@
 package baseDemo.map;
 
-import OfferDemo.node.TreeNode;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @Auther: 10413
@@ -14,14 +12,32 @@ import java.util.Queue;
  */
 public class DFS {
 
+    //深度优先求深度
     public int TreeDepth(TreeNode root) {
         if(root == null){
             return 0;
         }
-        int leftDepth = TreeDepth(root.left);
-        int rightDepth = TreeDepth(root.right);
+        int leftDepth = TreeDepth(root.lchild);
+        int rightDepth = TreeDepth(root.rchild);
         int result = 1 + ((leftDepth > rightDepth)?leftDepth:rightDepth);
         return result;
+    }
+
+    //深度优先遍历 非递归
+    public void depthFirstSearch(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        TreeNode node;
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            System.out.println(node.val);;//遍历根结点
+            if (node.rchild!=null) {
+                stack.push(node.rchild);  //先将右子树压栈
+            }
+            if (node.lchild!=null) {
+                stack.push(node.lchild);  //再将左子树压栈
+            }
+        }
     }
 
 
@@ -44,10 +60,10 @@ public class DFS {
             size = queue.size();
             while(size != 0){
                 node = queue.poll();
-                if(node.left != null){
-                    queue.add(node.left);}
-                if(node.right != null){
-                    queue.add(node.right);
+                if(node.lchild != null){
+                    queue.add(node.lchild);}
+                if(node.rchild != null){
+                    queue.add(node.rchild);
                 }
                 size--;//当size==0时说明同一层的元素遍历完成
             }

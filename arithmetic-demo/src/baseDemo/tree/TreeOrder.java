@@ -18,6 +18,19 @@ public class TreeOrder {
             preOrder(t.rchild,list);
         }
     }
+
+    //先序遍历构建二叉树
+    public static void preOrderConstructor(TreeNode t, char data[],int i) {
+        char e = data[i++];
+        if (e == '#') {
+            t = null;
+        } else {
+            t = new TreeNode(e);
+            preOrderConstructor(t.lchild, data, i);  //递归构建左子树
+            preOrderConstructor(t.rchild, data, i);  //递归构建右子树
+        }
+    }
+
     //中序遍历 递归算法
     public static void inOrder(TreeNode t,List<Integer> list){
         if (t!=null){

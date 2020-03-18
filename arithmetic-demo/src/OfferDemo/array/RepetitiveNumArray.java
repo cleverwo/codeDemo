@@ -12,7 +12,7 @@ import java.util.Arrays;
  * 也不知道每个数字重复几次。请找出数组中任意一个重复的数字。
  * 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。
  */
-public class Test50 {
+public class RepetitiveNumArray {
 
     /**
      *hash求
@@ -38,11 +38,29 @@ public class Test50 {
         return flag;
     }
 
+    public boolean duplicate1(int numbers[],int length,int[] duplication){
+        if(numbers==null||numbers.length==0){
+            return false;
+        }
+        int[] num = new int[length];
+        boolean flag = false;
+        for(int i=0;i<length;i++){
+            if(num[numbers[i]]!=0){
+                duplication[0]=numbers[i];
+                flag = true;
+                break;
+            }else{
+                num[numbers[i]]++;
+            }
+        }
+        return flag;
+    }
+
     public static void main(String[] args) {
-        Test50 t = new Test50();
-        int[] a = {2,1,3,1,4};
+        RepetitiveNumArray t = new RepetitiveNumArray();
+        int[] a = {2,4,2,1,4};
         int[] b = new int[1];
-        t.duplicate(a,a.length,b);
+        t.duplicate1(a,a.length,b);
         System.out.println(Arrays.toString(b));
     }
 }

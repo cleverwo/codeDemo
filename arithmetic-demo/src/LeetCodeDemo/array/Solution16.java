@@ -1,8 +1,5 @@
 package LeetCodeDemo.array;
 
-import com.sun.org.apache.xpath.internal.WhitespaceStrippingElementMatcher;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.Arrays;
 
 /**

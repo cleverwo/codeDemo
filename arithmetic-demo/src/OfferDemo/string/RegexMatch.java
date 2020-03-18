@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * 在本题中，匹配是指字符串的所有字符匹配整个模式。
  * 例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但是与"aa.a"和"ab*a"均不匹配
  */
-public class Test52 {
+public class RegexMatch {
 
     public boolean match(char[] str, char[] pattern) {
         if ((str==null||str.length==0)&&(pattern==null||pattern.length==0)){

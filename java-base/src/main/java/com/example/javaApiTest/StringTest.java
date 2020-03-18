@@ -1,6 +1,7 @@
 package com.example.javaApiTest;
 
 
+import java.sql.SQLOutput;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -9,10 +10,44 @@ import java.util.concurrent.CountDownLatch;
  * @Description: String, StringBuffer, StringBuilder区别
  */
 public class StringTest {
-    public static void main(String[] args) {
-        //test1();
-        //test();
-        //testStringBuilderAndStringBuffer();
+
+    public static void stringApiTest(){
+        //构造方法
+        //1 初始化为空的字符串
+        String s = new String();
+        //2 用默认的字节码初始化字符串
+        String s1 = new String(new byte[]{12,11,11});
+        //3 String(char[] value)
+        String s2 = new String(new char[]{'1','s','s'});
+        //4 String(string)
+        //5 String(Stringbuffer)
+        //6 String(Stringbuilder)
+
+        //方法：
+        //	char charAt(int index) 返回 char指定索引处的值。
+        //	int compareTo(String anotherString) 按字典顺序比较两个字符串。 如果相同返回0，不同返回不同位置的ASCII码的差值，如果是子串则返回长度的差值。
+        String a1 = "saass";
+        String a2 = "sasfdsdf";
+        System.out.println(a1.codePointAt(2));
+        System.out.println(a2.codePointAt(2));
+        System.out.println(a1.compareTo(a2));
+        //String concat(String str) 将指定字符串连接到其末尾
+        String c1 = "sdf";
+        String c2 = "ww";
+        System.out.println(c1.concat(c2));
+        //boolean contains(CharSequence s) 当且仅当此字符串包含指定的char值序列时才返回true。
+        System.out.println(c1.contains("d"));
+        //int	indexOf(int ch) 返回指定字符第一次出现的字符串内的索引。
+        //	replace(char oldChar, char newChar)返回从替换所有出现的导致一个字符串 oldChar在此字符串 newChar 。
+        //String replaceAll(String regex, String replacement)用给定的替换替换与给定的 regular expression匹配的此字符串的每个子字符串。regex支持正则表达
+        //String	substring(int beginIndex) 返回一个字符串，该字符串是此字符串的子字符串。
+        String sub1 = "asfsdfdsf".substring(3);
+        System.out.println(sub1);
+        //String	substring(int beginIndex, int endIndex) 返回一个字符串，该字符串是此字符串的子字符串。
+
+    }
+
+    public static void stringBufferTest(){
         // stringbuffer 基本方法实验 对应api
         StringBuffer stringBuffer1 = new StringBuffer();
         StringBuffer stringBuffer = new StringBuffer("1");
@@ -45,10 +80,12 @@ public class StringTest {
         String m = stringBuffer3.substring(0, 1);
         String n = stringBuffer.toString();
         stringBuffer.trimToSize(); // 去除多余的容量，使容量和长度一致
-        //string 基本方法使用
-        String string = new String();
-        //stringbuilder 基本方法
-        StringBuilder stringBuilder = new StringBuilder();
+    }
+
+    public static void main(String[] args) {
+        String sub1 = "asfsdfdsf".substring(3);
+        System.out.println(sub1);
+
     }
 
     // 测试string，stringbuffer，stringbuilder的性能
@@ -160,7 +197,6 @@ public class StringTest {
             latch2.await();
             System.out.println(stringBuffer.length());
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

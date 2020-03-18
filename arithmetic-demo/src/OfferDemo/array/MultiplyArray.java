@@ -11,28 +11,28 @@ package OfferDemo.array;
  * 不能使用除法。
  * （注意：规定B[0] = A[1] * A[2] * ... * A[n-1]，B[n-1] = A[0] * A[1] * ... * A[n-2];）
  */
-public class Test51 {
+public class MultiplyArray {
 
     /**
      * 思路：
      * 直接遍历暴力求解
-     * 题意理解错误了，
-     * @param A
-     * @return
      */
     public int[] multiply(int[] A) {
         if(A==null||A.length==0){
-            return new int[0];
+            return null;
         }
-        int[] b = new int[A.length];
-        int sum = 1;
-        for (int i = 0,j=1;i< A.length;i++,j++){
-            sum *= A[i];
-            if (j<A.length){
-                b[j] = sum;
+        int n = A.length;
+        int[] b = new int[n];
+        for (int i=0;i<n;i++){
+            int sum = 1;
+            for (int j=0;j<i;j++){
+                sum *= A[j];
             }
+            for (int j=i+1;j<n;j++){
+                sum *= A[j];
+            }
+            b[i] = sum;
         }
-        b[0] = sum;
         return b;
     }
 
@@ -46,7 +46,7 @@ public class Test51 {
      * b4:  a0  a1  a2  a3  1   ... an-2    an-1
      * b5:  a0  a1  a2  a3  a4  1   an-2    an-1
      * ...                          1       an-1
-     * bn-1:a0  a1  a2  a3  a4  ... an-2    an-1
+     * bn-1:a0  a1  a2  a3  a4  ... an-2    1
      *
      * B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。
      */
@@ -74,7 +74,7 @@ public class Test51 {
     }
 
     public static void main(String[] args) {
-        Test51 t =new Test51();
+        MultiplyArray t =new MultiplyArray();
         t.multiply(new int[]{1,2,3,4,5});
     }
 }
