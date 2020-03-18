@@ -1,6 +1,4 @@
-package LeetCodeDemo.array;
-
-import LeetCodeDemo.Solution;
+package LeetCodeDemo.string;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +8,7 @@ import java.util.List;
  * @Auther: 10413
  * @Date: 2020/3/17 18:00
  * @Description:
- * 39 组合总和
+ * 39 组合总和  17,22
  */
 public class Solution39 {
 

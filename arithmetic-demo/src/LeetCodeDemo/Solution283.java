@@ -9,7 +9,7 @@ package LeetCodeDemo;
  * 输入: [0,1,0,3,12]
  * 输出: [1,3,12,0,0]
  */
-public class Solution5 {
+public class Solution283 {
 
     /**
      *

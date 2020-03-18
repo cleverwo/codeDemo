@@ -15,7 +15,7 @@ import java.util.Arrays;
  * 向右旋转 2 步: [6,7,1,2,3,4,5]
  * 向右旋转 3 步: [5,6,7,1,2,3,4]
  */
-public class Solution1 {
+public class Solution189 {
 
     /**
      * 解法1 暴力破解

@@ -2,8 +2,6 @@ package LeetCodeDemo.link;
 
 import OfferDemo.node.ListNode;
 
-import java.util.List;
-
 /**
  * @Auther: 10413
  * @Date: 2020/3/11 17:27
@@ -23,13 +21,8 @@ public class Solution2 {
         int num = 0;
         while(p1!=null||p2!=null){
             int sum = (p1==null?0:p1.val) + (p2==null?0:p2.val)+num;
-            if (sum/10!=0){
-                num = sum/10;
-                sum = sum%10;
-            }else{
-                num = 0;
-            }
-            q.next = new ListNode(sum);
+            num = sum/10;
+            q.next = new ListNode(sum%10);
             q = q.next;
             if (p1!=null) p1 = p1.next;
             if(p2!=null) p2 = p2.next;
@@ -42,14 +35,15 @@ public class Solution2 {
 
     public static void main(String[] args) {
         Solution2 s = new Solution2();
-        ListNode l1 = add(new int[]{9,8});
-        ListNode l2 = add(new int[]{1});
+        ListNode l1 = getNewLink(new int[]{9,8});
+        ListNode l2 = getNewLink(new int[]{1});
         ListNode out = s.addTwoNumbers(l1,l2);
         printLink(out);
 
     }
 
-    public static ListNode add(int[] a){
+    // 新建链表
+    public static ListNode getNewLink(int[] a){
         ListNode p = new ListNode(0);
         ListNode q = p;
         for (int i=0;i<a.length;i++){
@@ -59,6 +53,7 @@ public class Solution2 {
         return p.next;
     }
 
+    //打印链表
     public static void printLink(ListNode root){
         while(root!=null){
             System.out.print(root.val+ " ");

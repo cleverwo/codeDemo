@@ -1,5 +1,7 @@
 package LeetCodeDemo;
 
+import OfferDemo.node.ListNode;
+
 /**
  * @Auther: wangzhendong
  * @Date: 2020/1/17 22:16
@@ -9,7 +11,7 @@ package LeetCodeDemo;
  * 输入：1->2->4, 1->3->4
  * 输出：1->1->2->3->4->4
  */
-public class Solution2 {
+public class Solution21 {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1==null){
             return l2;
@@ -38,7 +40,7 @@ public class Solution2 {
     }
 
     //递归
-    public ListNode megeTwoLists2(ListNode l1,ListNode l2){
+    public ListNode megeTwoLists2(ListNode l1, ListNode l2){
         if (l1 == null){
             return l2;
         }
@@ -56,13 +58,5 @@ public class Solution2 {
 
     public static void main(String[] args) {
         ListNode a = new ListNode(1);
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
     }
 }

@@ -1,16 +1,12 @@
 package LeetCodeDemo.string;
 
-import LeetCodeDemo.Solution;
-import sun.awt.image.ImageWatched;
-
-import javax.sound.sampled.spi.FormatConversionProvider;
 import java.util.*;
 
 /**
  * @Auther: 10413
  * @Date: 2020/3/17 15:53
  * @Description:
- * 22.括号生成
+ * 22.括号生成  17,39
  */
 public class Solution22 {
     /**

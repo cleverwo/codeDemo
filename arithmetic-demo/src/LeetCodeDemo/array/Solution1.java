@@ -1,7 +1,5 @@
 package LeetCodeDemo.array;
 
-import LeetCodeDemo.Solution;
-
 import java.util.Arrays;
 import java.util.HashMap;
 
