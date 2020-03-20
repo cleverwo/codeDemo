@@ -1,7 +1,5 @@
 package OfferDemo.string;
 
-import com.sun.org.apache.xpath.internal.WhitespaceStrippingElementMatcher;
-
 import java.util.*;
 
 /**
@@ -14,7 +12,7 @@ import java.util.*;
  * 输入描述
  * 输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
  */
-public class Test27 {
+public class StringSort {
 
     /**
      * 这是一道动态规划的题
@@ -34,7 +32,7 @@ public class Test27 {
      * 时间复杂度O(n*n!)
      */
     public ArrayList<String> Permutation1(String str) {
-        ArrayList<String> res = new ArrayList<String>();
+        ArrayList<String> res = new ArrayList<>();
         if(str.length() == 0){
             return res;
         }
@@ -42,7 +40,7 @@ public class Test27 {
         //对array进行从小到大排序，得到字典序的第一个数据
         Arrays.sort(array);
         String s = new String(array);
-        res.add(str);
+        res.add(s);
         while(true){
             s = nextString(s);
             if(!s.equals("finish")) {
@@ -139,7 +137,6 @@ public class Test27 {
      * 表示向第k个位置写值。递归的关键是维护一个剩余字符集合。
      * 没能解决重复和有序问题
      */
-    //TODO 回溯法
     ArrayList<String> res = new ArrayList<String>();
     HashSet<String> set = new HashSet<String>();
     int length;

@@ -1,4 +1,4 @@
-package OfferDemo;
+package OfferDemo.other;
 
 /**
  * @Auther: 10413
@@ -9,7 +9,7 @@ package OfferDemo;
  * 例如6、8都是丑数，但14不是，因为它包含质因子7。
  * 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。
  */
-public class Test33 {
+public class UglyNumber {
 
 
     /**
@@ -100,7 +100,7 @@ public class Test33 {
 
 
     public static void main(String[] args) {
-        Test33 t = new Test33();
+        UglyNumber t = new UglyNumber();
         System.out.println(t.GetUglyNumber_Solution(9));
     }
 }

@@ -1,4 +1,4 @@
-package OfferDemo;
+package OfferDemo.linklist;
 
 import OfferDemo.node.ListNode;
 
@@ -9,7 +9,7 @@ import OfferDemo.node.ListNode;
  * 16,合并两个排序的链表
  * 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
  */
-public class Test16 {
+public class MergeSortLink {
     /**
      * 直接从头到尾遍历,将list2插入到list1
      * @param list1

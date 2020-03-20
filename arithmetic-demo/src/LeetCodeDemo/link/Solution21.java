@@ -1,4 +1,4 @@
-package LeetCodeDemo;
+package LeetCodeDemo.link;
 
 import OfferDemo.node.ListNode;
 
@@ -12,6 +12,7 @@ import OfferDemo.node.ListNode;
  * 输出：1->1->2->3->4->4
  */
 public class Solution21 {
+
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1==null){
             return l2;
@@ -19,24 +20,24 @@ public class Solution21 {
         if (l2 ==null){
             return l1;
         }
-        ListNode l11=l1,l22=l2,now;
-        ListNode pre = new ListNode(0);
-        ListNode end = pre;
-        while (l11 != null&&l22!=null){
-            if (l11.val>l22.val){
-                now = l22.next;
-                pre.next = l22;
-                l22.next = l11;
-                l22 = now;
+        ListNode root = new ListNode(0);
+        ListNode p1=l1,p2=l2,q=root;
+        while(p1!=null&&p2!=null){
+            if(p1.val>p2.val){
+                q.next = p2;
+                p2=p2.next;
             }else{
-                now = l11.next;
-                pre.next = l11;
-                l11.next = l22;
-                l11 = now;
+                q.next=p1;
+                p1=p1.next;
             }
-            pre = pre.next;
+            q=q.next;
         }
-        return end.next;
+        if(p1!=null){
+            q.next=p1;
+        }else{
+            q.next = p2;
+        }
+        return root.next;
     }
 
     //递归
