@@ -90,7 +90,7 @@ public class AESCipher {
 
     public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
         //String plainText = "abc`~!@#$%^&*()_+-=':;<>?,./|{}[]\\\"xyz123中文";
-        String plainText = "{\"Addr\":\"190312001390\",\"NoticeType\":\"01\",\"Type\":\"00\",\"RegularData\":\"000000.00,000000.00,0869662038524333,000000,20190201102044,26,3.7,00\"}";
+        String plainText = "{\"Addr\":\"190312001390\",\"NoticeType\":\"01\",\"Type\":\"00\",\"RegularData\":\"000000.00,000000.00,0869662036253083,000000,20200330135648,85,3.6,00\"}";
         //String key = "16BytesLengthKey";
         String key = "000102030405060708090a0b0c0d0e0f";
 

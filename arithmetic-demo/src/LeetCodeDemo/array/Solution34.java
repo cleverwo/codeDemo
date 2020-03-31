@@ -1,6 +1,7 @@
 package LeetCodeDemo.array;
 
-import LeetCodeDemo.link.Solution2;
+import com.sun.org.apache.regexp.internal.RE;
+import sun.java2d.pipe.RegionIterator;
 
 /**
  * @Auther: 10413
@@ -52,11 +53,80 @@ public class Solution34 {
             }
         }
         // 这里的low的意思是比target小的数的个数，取值范围为[0-nums.length]
-        return low;
-        // target 比所有数都大
-        //if (low == nums.length) return -1;
-        // 类似之前算法的处理方式
-        //return nums[low] == target ? low : -1;
+        // target 比所有数都大 low =length 表示所有元素都比target小
+        if (low == nums.length) return -1;
+        // low = 0 表示比target小的元素为0个，看0坐标是否为target
+        return nums[low] == target ? low : -1;
+    }
+
+    //寻找右边界
+    public int searchRight(int[] nums, int target) {
+        if(nums==null||nums.length==0){
+            return -1;
+        }
+        int low = 0;
+        int high = nums.length;
+        while (low<high){
+            int mid = (low+high)/2;
+            if (nums[mid]==target){
+                low = mid+1;
+            }else if (target < nums[mid]){
+                high=mid;
+            }else if (nums[mid] < target){
+                low = mid +1;
+            }
+        }
+        //low 指向比target大的元素的坐标，low的范围为0-length
+        //low 为0表示没有比target大的元素，low=length表示末尾元素<=target
+        if (low == 0) return -1;
+        return nums[low-1] == target ? (low-1) : -1;
+    }
+    //找左右边界
+    public int[] searchRange1(int[] nums, int target){
+        int[] out = new int[2];
+        if(nums==null||nums.length==0){
+            out[0]=-1;
+            out[1]=-1;
+            return out;
+        }
+        int left = searchLeft(nums,target);
+        int right = searchRight(nums,target);
+        out[0] = left;
+        out[1] = right;
+        return out;
+    }
+
+    /**
+     * 左右一块找
+     */
+    public int[] searchRange2(int[] nums, int target){
+        int[] targetRange = {-1, -1};
+        int leftIdx = extremeInsertionIndex(nums, target, true);
+        //leftIdx 为 true时，但leftIdx = length，表示所有元素都小于target，没有左边界返回-1
+        //leftIdx=0时，表示比target小的元素有0个，判读0是否和target相等，不相等表示所有元素比target大，也就没有左边界
+        if (leftIdx == nums.length || nums[leftIdx] != target) {
+            return targetRange;
+        }
+        targetRange[0] = leftIdx;
+        //左边界存在，表示右边界也一定存在，右边界 leftIdx-1 = target
+        targetRange[1] = extremeInsertionIndex(nums, target, false)-1;
+        return targetRange;
+    }
+    private int extremeInsertionIndex(int[] nums, int target, boolean left) {
+        int lo = 0;
+        int hi = nums.length;
+
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            //left = true 为找左边界和searchLeft一样， left = false 找右边界
+            if (nums[mid] > target || (left && target == nums[mid])) {
+                hi = mid;
+            } else {
+                lo = mid+1;
+            }
+        }
+        //lo 取值范围为[0-length]
+        return lo;
     }
 
     public static void main(String[] args) {

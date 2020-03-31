@@ -2,6 +2,7 @@ package com.example.javaApiTest;
 
 
 import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -11,14 +12,14 @@ import java.util.concurrent.CountDownLatch;
  */
 public class StringTest {
 
-    public static void stringApiTest(){
+    public static void stringApiTest() {
         //构造方法
         //1 初始化为空的字符串
         String s = new String();
         //2 用默认的字节码初始化字符串
-        String s1 = new String(new byte[]{12,11,11});
+        String s1 = new String(new byte[]{12, 11, 11});
         //3 String(char[] value)
-        String s2 = new String(new char[]{'1','s','s'});
+        String s2 = new String(new char[]{'1', 's', 's'});
         //4 String(string)
         //5 String(Stringbuffer)
         //6 String(Stringbuilder)
@@ -35,8 +36,15 @@ public class StringTest {
         String c1 = "sdf";
         String c2 = "ww";
         System.out.println(c1.concat(c2));
-        //boolean contains(CharSequence s) 当且仅当此字符串包含指定的char值序列时才返回true。
-        System.out.println(c1.contains("d"));
+
+        /**
+         *  contains 判断String 是否存在指定char
+         *  方法： boolean contains(CharSequence s) 当且仅当此字符串包含指定的char值序列时才返回true。
+         *      CharSequence相当于String
+         */
+        String cotains1 = "12.22.3";
+        System.out.println(cotains1.contains("."));
+
         //int	indexOf(int ch) 返回指定字符第一次出现的字符串内的索引。
         //	replace(char oldChar, char newChar)返回从替换所有出现的导致一个字符串 oldChar在此字符串 newChar 。
         //String replaceAll(String regex, String replacement)用给定的替换替换与给定的 regular expression匹配的此字符串的每个子字符串。regex支持正则表达
@@ -45,9 +53,19 @@ public class StringTest {
         System.out.println(sub1);
         //String	substring(int beginIndex, int endIndex) 返回一个字符串，该字符串是此字符串的子字符串。
 
+        /**
+         * split 分割字符串：
+         * 方法:String[]	split(String regex) 将此字符串分割为给定的 regular expression的匹配。
+         *      String[]	split(String regex, int limit) 将这个字符串拆分为给定的 regular expression的匹配。
+         *      limit 控制拆分完数组的长度，limit<=0,不做限制，假设最大拆分数组长度为n，则limit<=n有效，大于n则相当于n
+         *  注意 分割的标点符号 有点要加\\
+         */
+        String[] split1 = "1.2.1".split("\\.");
+        String[] split2 = "1.2.1".split("\\.", 1);
+        System.out.println(Arrays.toString(split2));
     }
 
-    public static void stringBufferTest(){
+    public static void stringBufferTest() {
         // stringbuffer 基本方法实验 对应api
         StringBuffer stringBuffer1 = new StringBuffer();
         StringBuffer stringBuffer = new StringBuffer("1");
@@ -83,8 +101,9 @@ public class StringTest {
     }
 
     public static void main(String[] args) {
-        String sub1 = "asfsdfdsf".substring(3);
-        System.out.println(sub1);
+        String cotains1 = "12.22.3";
+        System.out.println(cotains1.contains("."));
+        System.out.println(cotains1.contains(":"));
 
     }
 
@@ -202,12 +221,12 @@ public class StringTest {
     }
 
     // 打印对象的内存地址对比测试
-    public static void soutHash(){
+    public static void soutHash() {
         String s1 = "hello";
         String s2 = "world";
         String s3 = "helloworld";
-        String s4 = s1+s2;
-        System.out.println(s3==s4); // false
+        String s4 = s1 + s2;
+        System.out.println(s3 == s4); // false
         System.out.println(s3.hashCode()); //地址一样
         System.out.println(s4.hashCode());
         System.out.println(System.identityHashCode(s3)); //地址不同
