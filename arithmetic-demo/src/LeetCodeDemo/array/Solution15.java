@@ -56,10 +56,13 @@ public class Solution15 {
         Arrays.sort(nums);
         for (int i=0;i<nums.length;i++){
             int target = -nums[i];
+            // target 和 第一个数相等那肯定不能实现了
             if (i>0 && nums[i] == nums[i-1]) continue;
+            //快排思路了，k = low ，j = high
             int k = nums[i+1];
             int j = nums[nums.length-1];
             while(k<j){
+                // 如果 low+high = target 合适
                 if (nums[j]+nums[k]==target){
                     List<Integer> list = new ArrayList<>();
                     list.add(nums[i]);
@@ -67,7 +70,7 @@ public class Solution15 {
                     list.add(nums[k]);
                     result.add(list);
                     j--;k++;
-                    //去重
+                    //去重 因为数组有序，所以k是小的数和前面参与比较的数相同的化，k++到和前面k-1大的数上
                     while(k<nums.length&&nums[k]==nums[k-1]) k++;
                     while(j>0&&nums[j]==nums[j+1]) j--;
                 }else if(nums[j]+nums[k]>target){

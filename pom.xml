@@ -21,6 +21,7 @@
         <module>jwt-demo</module>
         <module>rsa-demo</module>
         <module>java-base</module>
+        <module>spring-test</module>
     </modules>
 
     <properties>

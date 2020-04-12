@@ -175,4 +175,23 @@ public class Solution4 {
         int[] b = new int[]{3,4};
         System.out.println(s.findMedianSortedArrays2(a, b));
     }
+
+    public static int getK(int[] n1, int a1,int a2, int[] n2,int b1,int b2,int k){
+        int len1 = a2-a1+1;
+        int len2 = b2-b1+1;
+        if (len1>len2){
+           return getK(n2,b1,b2,n1,a1,a2,k);
+        }
+        if (len1==0) return n2[b1+k-1];
+        if (k==1){
+            return Math.min(n1[a1],n2[b1]);
+        }
+        int i = a1 + Math.min(len1,k/2) -1;
+        int j = b1 + Math.min(len2,k/2) -1;
+        if (n1[i]>n2[j]){
+            return getK(n1,a1,a2,n2,j+1,b2,k-(j-b1+1));
+        }else{
+            return getK(n1,i+1,a2,n2,b1,b2,k-(i-a1+1));
+        }
+    }
 }

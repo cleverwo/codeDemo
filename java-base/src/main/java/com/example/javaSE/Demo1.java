@@ -19,6 +19,7 @@ public class Demo1 {
     public static void main(String[] args) {
         Demo1 demo = new Demo1();
         demo.test8();
+
     }
     // hashcode 实验
     public void test1(){

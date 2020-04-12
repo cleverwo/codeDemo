@@ -1,5 +1,7 @@
 package LeetCodeDemo;
 
+import javafx.scene.layout.Priority;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
@@ -331,6 +333,56 @@ public class Main {
             return half.multiply(half).mod(new BigInteger(mod + ""));
         } else {
             return half.multiply(half).multiply(new BigInteger(n + "")).mod(new BigInteger(n + ""));
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] a = {1,2};
+        int[] b = {3,4};
+        System.out.println(findMedianSortedArrays(a,b));
+    }
+
+    //1.俩数之和
+    public static int[] twoSum(int[] nums, int target) {
+        Map<Integer,Integer> map = new HashMap<>();
+        for (int i =0;i<nums.length;i++){
+            int cha  = target - nums[i];
+            if (map.containsKey(cha)){
+                return new int[]{map.get(cha),i};
+            }else{
+                map.put(nums[i],i);
+            }
+        }
+        return null;
+    }
+    //4。有序链表中位数
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int len = m+n;
+        int left = (len+1)/2;//①注意这里的left和right的数不是下标，是第几个数
+        int right = (len+2)/2;
+        return (getKth(nums1,0,n-1,nums2,0,m-1,left)+getKth(nums1,0,n-1,nums2,0,m-1,right)) *0.5;
+
+    }
+    public static int getKth(int[] nums1,int a,int b,int[] nums2,int c,int d,int k){
+        int n = b-a+1;//②入参abcd是下标，k是指第几个数，不是下标
+        int m = d-c+1;
+        if (n>m){
+            return getKth(nums2,c,d,nums1,a,b,k);
+        }
+        if (n==0){
+            return nums2[c+k-1];
+        }
+        if (k==1){
+            return Math.min(nums1[a],nums2[c]);
+        }
+        int i = a + Math.min(k/2,n)-1;//i和j指向下标， a+len 表示的时比较第几个数
+        int j = c + Math.min(k/2,m)-1;
+        if (nums1[i]>nums2[j]){
+            return getKth(nums1,a,b,nums2,j+1,d,k-(j-c+1));
+        }else{
+            return getKth(nums1,i+1,b,nums2,c,d,k-(i-a+1));
         }
     }
 
