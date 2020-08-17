@@ -101,9 +101,11 @@ public class StringTest {
     }
 
     public static void main(String[] args) {
-        String cotains1 = "12.22.3";
-        System.out.println(cotains1.contains("."));
-        System.out.println(cotains1.contains(":"));
+        String a1 = "aaa";
+        String a2 = "sss";
+        System.out.println(a1.codePointAt(2));
+        System.out.println(a2.codePointAt(2));
+        System.out.println(a1.compareTo(a2));
 
     }
 

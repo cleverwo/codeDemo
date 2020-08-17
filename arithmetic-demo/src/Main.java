@@ -1,193 +1,103 @@
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.function.DoublePredicate;
+import LeetCodeDemo.link.Solution2;
+
+import javax.sound.midi.Soundbank;
+import java.util.*;
 
 /**
  * @Auther: 10413
- * @Date: 2020/3/24 20:11
+ * @Date: 2020/4/24 08:20
  * @Description:
- * 360 2题
  */
 public class Main {
 
-    public int dna(String a, String b){
-        if (a==null||b==null){
-            return -1;
-        }
-        char[] cara = a.toCharArray();
-        char[] carb = b.toCharArray();
-        int n =cara.length,m = carb.length;
-        int A=0, T=0;
-        for (int i = 0;i<n;i++){
-            if (cara[i]!=carb[i]){
-                if (cara[i]=='A'){
-                    A++;
-                }else{
-                    T++;
-                }
-            }
-        }
-        return Math.abs(A-T)+Math.min(A,T);
-
-    }
-
-    public void test(){
-        Scanner c = new Scanner(System.in);
-        int n = c.nextInt();
-        int m = c.nextInt();
-        double[][] dp = new double[n+1][m+1];
-        for (int i=0;i<=n;i++){
-            for (int j=0;j<=m;j++){
-                if (i==0&&j==0){
-                    dp[i][j] = 0;
-                }else if(i==0){
-                    dp[i][j] = 0;
-                }else if(j==0){
-                    dp[i][j]=1;
-                }else{
-                    dp[i][j] = 1.0*i/(i+j) +
-                            1.0*j/(i+j) *
-                                    (j-1)/(i+j-1) *
-                                    ((j-2>=0?1.0*i/(i+j-2)*dp[i-1][j-2]:0) +
-                                            (j-3>=0?1.0*(j-2)/(i+j-2)*dp[i][j-3]:0));
-                }
-            }
-        }
-        System.out.println(dp[n][m]);
-    }
-    public void test1(){
-        Scanner c = new Scanner(System.in);
-        String a = c.next();
-        boolean flag = true;
-        if (a.charAt(0) == '-'){
-            flag = false;
-        }
-        String[] b = new String[9];
-        for (int i =0;i<9;i++){
-            b[i] = c.next();
-        }
-        int n = a.length();
-        int s = 0;
-        StringBuffer result = new StringBuffer();
-        if (!flag){
-            result.append("-");
-            s=1;
-        }
-        for (int i=s;i<n;i++){
-            char num = a.charAt(i);
-            int aa = Integer.parseInt(String.valueOf(num));
-            result.append(b[aa-1]);
-        }
-        System.out.println(result);
-    }
-
-    public void test2(){
-        Scanner c = new Scanner(System.in);
-        int r = c.nextInt();
-        int[] row = new int[r];
-        for (int i=0;i<r;i++){
-            row[i] = c.nextInt();
-        }
-        int n = row.length;
-        Arrays.sort(row);
-        BigDecimal result = new BigDecimal(0);
-        boolean add =true;
-        for (int i =n-1;i>=0;i=i-2){
-            BigDecimal r1 = new BigDecimal(row[i]);
-            r1 = r1.multiply(r1);
-            BigDecimal r2 = new BigDecimal(0);
-            if (i>0){
-                r2 = new BigDecimal(row[i-1]);
-            }else{
-                r2 = new BigDecimal(0);
-            }
-            r2 = r2.multiply(r2);
-            BigDecimal now = r1.subtract(r2);
-            result = result.add(now);
-        }
-        result = result.multiply(new BigDecimal(Math.PI));
-        double out = result.setScale(5,BigDecimal.ROUND_HALF_UP).doubleValue();
-        System.out.println(out);
-    }
-
-
     public static void main(String[] args) {
-
-    }
-
-    public static boolean isFin(List<Integer> a){
-        for (int i=0;i<a.size();i++){
-            if (i%a.get(i)!=0){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void tst(){
         Scanner c = new Scanner(System.in);
         int n = c.nextInt();
-        int[] num = new int[n];
-        StringBuffer s = new StringBuffer();
-        for (int i=0;i<n;i++){
-            num[i]= c.nextInt();
+        List<Long> result = new ArrayList<>();
+        while (n>0){
+            int a = c.nextInt();
+            long k = c.nextLong();
+            int[] ai = new int[a];
+            int[] fi = new int[a];
+            for (int j = 0; j < a; j++) {
+                ai[j] = c.nextInt();
+            }
+            for (int j = 0; j < a; j++) {
+                fi[j] = c.nextInt();
+            }
+            result.add(getResult(a, k, ai, fi));
+            n--;
         }
-        int mod = 998244353;
-        int result = 0;
-        int length = num.length;
-        int end = 1<<length;
-        int mark = 0;
-        List<Integer> list = new ArrayList<>();
-        for (mark = 0;mark<end;mark++){
-            boolean isNull = true;
-            for (int i=0;i<length;i++){
-                if ((1<<i & mark)!=0){
-                    isNull = false;
-                    list.add(num[i]);
-                    if (isFin(list)){
-                        return;
-                    }
-                    System.out.println(num[i]+ " ");;
+        for (Long l : result) {
+            System.out.println(l);
+        }
+    }
+
+    public static long getResult(int a, long k, int[] ai, int[] fi) {
+        Arrays.sort(fi);
+        long sum = 0;
+        for (int i = 0; i < a; i++) {
+            sum += ai[i];
+        }
+        if ((sum - k) < 0) {
+            return 0;
+        } else {
+            long num = (sum - k) / a;
+            long yu = (sum - k) % a;
+            long max = Integer.MIN_VALUE;
+            for (int i = 0; i < a; i++) {
+                if (yu > 0) {
+                    max = Math.max(max, fi[i] * (num + 1));
+                } else {
+                    max = Math.max(max, fi[i] * num);
                 }
+                yu--;
             }
+            return max;
         }
-        System.out.println();
     }
 
-    //阿里笔试第一题
-    public void Alibaba1(){
+    public static void main1(String[] args) {
         Scanner c = new Scanner(System.in);
-        String s = c.next();
-        String t = c.next();
-        int n = s.length();
-        List<Character> list = new ArrayList<>();
-        int i =0,j=0;
-        int sum = 0;
-        while (i<n&&j<n){
-            char sc = s.charAt(i);
-            char tc = t.charAt(j);
-            if (sc!=tc){
-                i++;
-                list.add(sc);
-            }else{
-                i++;
-                j++;
+        int n = c.nextInt();
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int q = c.nextInt();
+            c.useDelimiter("\n");
+            Queue<Integer> queue = new LinkedList<>();
+            while (q > 0) {
+                String line = c.next();
+                result(line, queue, result);
+                q--;
             }
         }
-        while (j<n){
-            char tc = t.charAt(j);
-            if (list.contains(tc)){
-                sum++;
-                j++;
-            }else{
-                System.out.println(-1);
-                return;
-            }
+        for (Integer num : result) {
+            System.out.println(num);
         }
-        System.out.println(sum);
     }
 
+    public static void result(String line, Queue<Integer> queue, List<Integer> result) {
+        String[] str = line.split("\\s+");
+        String mark = str[0];
+        if (mark.equals("PUSH")) {
+            int num = Integer.parseInt(str[1]);
+            queue.offer(num);
+        } else if (mark.equals("TOP")) {
+            if (queue.isEmpty()) {
+                result.add(-1);
+            } else {
+                result.add(queue.peek());
+            }
+        } else if (mark.equals("POP")) {
+            if (queue.isEmpty()) {
+                result.add(-1);
+            } else {
+                queue.poll();
+            }
+        } else if (mark.equals("SIZE")) {
+            result.add(queue.size());
+        } else if (mark.equals("CLEAR")) {
+            queue.clear();
+        }
+    }
 }

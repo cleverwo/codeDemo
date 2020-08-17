@@ -10,39 +10,18 @@ import java.util.Stack;
  * @Description: 5, 最长回文子串
  */
 public class Solution5 {
-    /**
-     * 回文子串：
-     * cbbc 中cb 对应bc 所以回文是cbbc
-     * 最简单我遍历子串，入栈出栈
-     */
-    public String longestPalindrome(String s) {
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            stack.push(s.charAt(i));
-            int j = i + 1;
-            while (j < s.length()) {
-                if (j != stack.peek()) {
-                    stack.push(s.charAt(j));
-                } else {
-                    stack.pop();
-                }
-            }
-            if (stack.isEmpty()) {
-
-            }
-        }
-        return "";
-    }
 
     /**
      * 暴力解法
      */
-    public String longestPalindrome1_0(String s) {
+    public String longestPalindrome1(String s) {
         if (s == null || s.length() == 0) {
             return "";
         }
+        // 存所有的回文子串
         List<String> all = new ArrayList<>();
         String max = "";
+        // 假设abbc 从ab，abb，abbc, bb,,bbc,bc,一个个实验
         for (int i = 0; i < s.length(); i++) {
             for (int j = i; j < s.length(); j++) {
                 String sub = s.substring(i, j + 1);
@@ -96,6 +75,6 @@ public class Solution5 {
 
     public static void main(String[] args) {
         Solution5 s = new Solution5();
-        System.out.println(s.longestPalindrome2("a"));
+        System.out.println(s.longestPalindrome1("abbc"));
     }
 }

@@ -42,6 +42,9 @@ public class Solution17 {
      * 回溯其实就是dfs 递归
      */
     Map<String,String> map = new HashMap<String,String>(){
+        //第一层括弧实际是定义了一个匿名内部类 (Anonymous Inner Class)
+        // 第二层括弧实际上是一个实例初始化块 (instance initializer block)
+        // 这个块在内部匿名类构造时被执行。
         {
             put("2","abc");
             put("3","def");

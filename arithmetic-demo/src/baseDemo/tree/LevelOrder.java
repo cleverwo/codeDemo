@@ -1,6 +1,6 @@
 package baseDemo.tree;
 
-import javafx.geometry.Pos;
+import _modal.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;

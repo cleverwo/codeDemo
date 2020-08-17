@@ -1,5 +1,7 @@
 package baseDemo.tree;
 
+import _modal.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
 public class TreeOrder {
 
     // 先序递归
-    public static void preOrder(TreeNode t,List<Integer> list){
+    public static void preOrder(TreeNode t, List<Integer> list){
         if (t!=null){
             list.add(t.val);
             preOrder(t.lchild,list);
