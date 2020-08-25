@@ -1,7 +1,6 @@
-package LeetCodeDemo.tree;
+package LeetCodeDemo.eassy.tree;
 
 import _modal.TreeNode;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 /**
  * @Auther: 10413
@@ -15,7 +14,7 @@ public class Solution110 {
         if (root == null) {
             return 0;
         }
-        return Math.max(getDeep(root.lchild), getDeep(root.rchild)) + 1;
+        return Math.max(getDeep(root.left), getDeep(root.right)) + 1;
     }
 
     //这个ReturnNode是参考我描述的递归套路的第二步：思考返回值是什么
@@ -44,8 +43,8 @@ public class Solution110 {
             return new ReturnNode(0, true);
         }
         //不平衡的情况有3种：左树不平衡、右树不平衡、左树和右树差的绝对值大于1
-        ReturnNode left = isBST(root.lchild);
-        ReturnNode right = isBST(root.rchild);
+        ReturnNode left = isBST(root.left);
+        ReturnNode right = isBST(root.right);
         if (left.isB == false || right.isB == false) {
             return new ReturnNode(0, false);
         }
@@ -63,16 +62,16 @@ public class Solution110 {
             return true;
         }
         // 深度小于1，左右为平衡
-        return Math.abs(height(root.lchild) - height(root.rchild)) <= 1
-                && isBalanced(root.lchild)
-                && isBalanced(root.rchild);
+        return Math.abs(height(root.left) - height(root.right)) <= 1
+                && isBalanced(root.left)
+                && isBalanced(root.right);
     }
 
     public int height(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        return Math.max(height(root.lchild), height(root.rchild)) + 1;
+        return Math.max(height(root.left), height(root.right)) + 1;
     }
 
 }

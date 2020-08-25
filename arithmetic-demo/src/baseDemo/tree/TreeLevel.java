@@ -11,9 +11,9 @@ import java.util.Queue;
  * @Description:
  * 层次遍历二叉树
  */
-public class LevelOrder {
+public class TreeLevel {
 
-    public void levelOrder(TreeNode t){
+    public static void levelOrder(TreeNode t){
         Queue<TreeNode> queue = new LinkedList<>();
         TreeNode p=t;
         queue.offer(p);
@@ -27,5 +27,9 @@ public class LevelOrder {
                 queue.offer(p.right);
             }
         }
+    }
+
+    public void levelPrint(TreeOrder t){
+
     }
 }
