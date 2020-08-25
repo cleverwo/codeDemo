@@ -19,12 +19,12 @@ public class LevelOrder {
         queue.offer(p);
         while (!queue.isEmpty()){
             p = queue.poll();
-            System.out.println(p.val);
-            if (p.lchild!=null){
-                queue.offer(p.lchild);
+            System.out.print(p.val + " ");
+            if (p.left!=null){
+                queue.offer(p.left);
             }
-            if (p.rchild!=null) {
-                queue.offer(p.rchild);
+            if (p.right!=null) {
+                queue.offer(p.right);
             }
         }
     }
