@@ -3,7 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-.class
 
 ### STS ###
 .apt_generated
@@ -19,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-
+*.class
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -27,6 +26,7 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
+out/
 
 ### VS Code ###
 .vscode/
