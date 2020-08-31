@@ -1,9 +1,10 @@
 package OfferDemo.tree;
 
 
+import _modal.TreeNode;
+
 import java.util.HashMap;
 
-import OfferDemo.node.TreeNode;
 
 /**
  * @Auther: 10413

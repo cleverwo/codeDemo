@@ -1,4 +1,4 @@
-import OfferDemo.node.ListNode;
+import _modal.ListNode;
 
 import java.util.*;
 

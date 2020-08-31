@@ -1,6 +1,6 @@
 package OfferDemo.linklist;
 
-import OfferDemo.node.ListNode;
+import _modal.ListNode;
 
 /**
  * @Auther: 10413

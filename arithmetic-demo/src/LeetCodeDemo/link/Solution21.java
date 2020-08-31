@@ -1,6 +1,6 @@
 package LeetCodeDemo.link;
 
-import OfferDemo.node.ListNode;
+import _modal.ListNode;
 
 /**
  * @Auther: wangzhendong

@@ -1,13 +1,12 @@
 package LeetCodeDemo.eassy;
 
-import javax.sound.midi.Soundbank;
+import java.nio.channels.Pipe;
 import java.util.*;
 
 /**
  * @Auther: 10413
  * @Date: 2020/8/24 23:45
- * @Description:
- * 每日一题
+ * @Description: 每日一题
  */
 public class Test {
 
@@ -33,19 +32,22 @@ public class Test {
         }
         return false;
     }
+
     //
     public boolean repeatedSubstringPattern2(String s) {
-        int a = (s+s).indexOf(s,1);
-        if (a != s.length()){
+        int a = (s + s).indexOf(s, 1);
+        if (a != s.length()) {
             return true;
         }
         return false;
     }
+
     // 用kmp代替indexOf
-    public boolean repeatedSubstringPattern3(String s){
+    public boolean repeatedSubstringPattern3(String s) {
         // s+s 中去点首尾 是否存在 s
-        return kmp(s+s,s);
+        return kmp(s + s, s);
     }
+
     public boolean kmp(String query, String pattern) {
         int n = query.length();
         int m = pattern.length();
@@ -76,52 +78,53 @@ public class Test {
     }
 
 
-
     //491. 递增子序列 8-25
     public List<List<Integer>> findSubsequences(int[] nums) {
         List<Integer> result = new ArrayList<>();
-        return  null;
+        return null;
     }
+
     List<Integer> temp = new ArrayList<>();
     List<List<Integer>> result = new ArrayList<>();
+
     public List<List<Integer>> findSubsequences2(int[] nums) {
-        dfs(0,Integer.MIN_VALUE,nums);
+        dfs(0, Integer.MIN_VALUE, nums);
         return result;
     }
 
-    public void dfs(int cur,int last,int[] nums){
-        if(cur == nums.length){
-            if(temp.size() >=2 ){
+    public void dfs(int cur, int last, int[] nums) {
+        if (cur == nums.length) {
+            if (temp.size() >= 2) {
                 result.add(new ArrayList<Integer>(temp));
             }
             return;
         }
-        if(nums[cur] >= last){
+        if (nums[cur] >= last) {
             temp.add(nums[cur]);
-            dfs(cur+1,nums[cur],nums);
-            temp.remove(temp.size()-1);
+            dfs(cur + 1, nums[cur], nums);
+            temp.remove(temp.size() - 1);
         }
-        if(nums[cur] != last){
-            dfs(cur+1,last,nums);
+        if (nums[cur] != last) {
+            dfs(cur + 1, last, nums);
         }
     }
 
     //17. 电话号码的字母组合 8-26
     public List<String> letterCombinations(String digits) {
-        Map<String,String> map = new HashMap<>();
-        map.put("2","abc");
-        map.put("3","def");
-        map.put("4","ghi");
-        map.put("5","jkl");
-        map.put("6","mno");
-        map.put("7","pqrs");
-        map.put("8","tuv");
-        map.put("9","wxyz");
+        Map<String, String> map = new HashMap<>();
+        map.put("2", "abc");
+        map.put("3", "def");
+        map.put("4", "ghi");
+        map.put("5", "jkl");
+        map.put("6", "mno");
+        map.put("7", "pqrs");
+        map.put("8", "tuv");
+        map.put("9", "wxyz");
         List<String> result = new ArrayList<>();
-        if(digits == null || digits.length() == 0){
+        if (digits == null || digits.length() == 0) {
             return result;
         }
-        backup(result,map,digits,0,new StringBuffer());
+        backup(result, map, digits, 0, new StringBuffer());
         return result;
     }
 
@@ -141,30 +144,73 @@ public class Test {
             }
         }
     }
-    public void backup(List<String> result, Map<String,String> map,
-                       String digits, int index, StringBuffer path){
-        if(index == digits.length()){
+
+    public void backup(List<String> result, Map<String, String> map,
+                       String digits, int index, StringBuffer path) {
+        if (index == digits.length()) {
             result.add(path.toString());
-        }else{
-            String num = digits.substring(index,index+1);
+        } else {
+            String num = digits.substring(index, index + 1);
             String value = map.get(num);
-            for(int i=0;i<value.length();i++){
+            for (int i = 0; i < value.length(); i++) {
                 path.append(value.charAt(i));
-                backup(result,map,digits,index+1,path);
-                path.deleteCharAt(path.length()-1);
+                backup(result, map, digits, index + 1, path);
+                path.deleteCharAt(path.length() - 1);
             }
         }
     }
 
-    //
+    //332. 重新安排行程 8.27
+    Map<String, PriorityQueue<String>> map = new HashMap<String, PriorityQueue<String>>();
+    List<String> itinerary = new LinkedList<String>();
+
+    public List<String> findItinerary(List<List<String>> tickets) {
+        for (List<String> ticket : tickets) {
+            String src = ticket.get(0), dst = ticket.get(1);
+            if (!map.containsKey(src)) { //  将数据 放到map中
+                map.put(src, new PriorityQueue<String>());// value 为优先队列
+            }
+            map.get(src).offer(dst);
+        }
+        dfs("JFK");
+        Collections.reverse(itinerary);
+        return itinerary;
+    }
+
+    public void dfs(String curr) {
+        while (map.containsKey(curr) && map.get(curr).size() > 0) { //存在键值且value不为空
+            String tmp = map.get(curr).poll();
+            dfs(tmp);
+        }
+        itinerary.add(curr);
+    }
 
 
+    //657. 机器人能否返回原点 8-28
+    public boolean judgeCircle(String moves) {
+        Map<Character, int[]> map = new HashMap<>();
+        map.put('U', new int[]{0,1});
+        map.put('D', new int[]{0,-1});
+        map.put('L', new int[]{1,0});
+        map.put('R', new int[]{-1,0});
+        int[] point = {0,0};
+        for (int i =0;i<moves.length();++i){
+            char c = moves.charAt(i);
+            int[] move = map.get(c);
+            point[0] += move[0];
+            point[1] += move[1];
+        }
+        if (point[0] == 0&& point[1]==0){
+            return true;
+        }
+        return false;
+    }
 
 
     public static void main(String[] args) {
-        String str ="23";
-        List<String> list = new Test().letterCombinations(str);
-        System.out.println(list.toString());
+        Test t = new Test();
+        System.out.println(t.judgeCircle("LL"));
+
 
     }
 }

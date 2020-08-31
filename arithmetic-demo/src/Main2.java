@@ -1,5 +1,6 @@
-import OfferDemo.node.ListNode;
-import OfferDemo.node.TreeNode;
+import _modal.ListNode;
+import _modal.TreeNode;
+
 import java.util.*;
 
 /**

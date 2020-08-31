@@ -1,13 +1,11 @@
 package LeetCodeDemo.tree;
 
-import OfferDemo.node.ListNode;
-import OfferDemo.node.TreeNode;
-import sun.reflect.generics.tree.Tree;
+
+import _modal.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import java.util.zip.Adler32;
 
 /**
  * @Auther: 10413

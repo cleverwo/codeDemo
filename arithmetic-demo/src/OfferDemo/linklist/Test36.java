@@ -1,7 +1,6 @@
 package OfferDemo.linklist;
 
-import OfferDemo.node.ListNode;
-import com.sun.org.apache.xpath.internal.WhitespaceStrippingElementMatcher;
+import _modal.ListNode;
 
 /**
  * @Auther: 10413

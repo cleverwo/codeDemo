@@ -1,6 +1,7 @@
 package OfferDemo.tree;
 
-import OfferDemo.node.TreeNode;
+
+import _modal.TreeNode;
 
 import java.util.ArrayList;
 
