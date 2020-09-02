@@ -189,27 +189,54 @@ public class Test {
     //657. 机器人能否返回原点 8-28
     public boolean judgeCircle(String moves) {
         Map<Character, int[]> map = new HashMap<>();
-        map.put('U', new int[]{0,1});
-        map.put('D', new int[]{0,-1});
-        map.put('L', new int[]{1,0});
-        map.put('R', new int[]{-1,0});
-        int[] point = {0,0};
-        for (int i =0;i<moves.length();++i){
+        map.put('U', new int[]{0, 1});
+        map.put('D', new int[]{0, -1});
+        map.put('L', new int[]{1, 0});
+        map.put('R', new int[]{-1, 0});
+        int[] point = {0, 0};
+        for (int i = 0; i < moves.length(); ++i) {
             char c = moves.charAt(i);
             int[] move = map.get(c);
             point[0] += move[0];
             point[1] += move[1];
         }
-        if (point[0] == 0&& point[1]==0){
+        if (point[0] == 0 && point[1] == 0) {
             return true;
         }
         return false;
     }
 
+    //841. 钥匙和房间
+    int num;
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        num = 0;
+        boolean[] target = new boolean[rooms.size()];
+        Arrays.fill(target, false);
+        dfs1(target, rooms, 0);
+        return num == rooms.size();
+
+    }
+
+    public void dfs1(boolean[] target, List<List<Integer>> rooms, int index) {
+        target[index] = true;
+        num++;
+        for (int x : rooms.get(index)) {
+            if (!target[x]) {
+                dfs1(target, rooms, x);
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         Test t = new Test();
-        System.out.println(t.judgeCircle("LL"));
+        List<List<Integer>> list = new ArrayList<>();
+        //[[2,3],[],[2],[1,3,1]]
+        list.add(Arrays.asList(2, 3));
+        list.add(new ArrayList<>());
+        list.add(Arrays.asList(2));
+        list.add(Arrays.asList(1, 3, 1));
+        System.out.println(t.canVisitAllRooms(list));
 
 
     }

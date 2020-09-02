@@ -10,109 +10,7 @@ import java.util.*;
  */
 public class Main2 {
 
-    //工具类 层次打印二叉树
-    private static void printTree(TreeNode t) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        //创建一个队列，用于存储当前节点的所有相邻节点
-        Queue<TreeNode> queue = new LinkedList();
-        queue.add(t);
-        boolean flag = true;
-        while (!queue.isEmpty() && flag) {
-            flag = false;
-            //记录当前节点相邻结点的个数
-            int size = queue.size();
-            ArrayList<Integer> list = new ArrayList<>();
-            //遍历当前节点的所有相邻节点，并将遍历过的节点的相邻节点放到队列中
-            for (int i = 0; i < size; i++) {
-                TreeNode temp = queue.poll();
-                if (temp == null) {
-                    list.add(-1);
-                    queue.add(null);
-                    queue.add(null);
-                } else {
-                    list.add(temp.val);
-                    if (temp.left != null) {
-                        queue.add(temp.left);
-                        flag = true;
-                    } else {
-                        queue.add(null);
-                    }
-                    if (temp.right != null) {
-                        queue.add(temp.right);
-                        flag = true;
-                    } else {
-                        queue.add(null);
-                    }
-                }
-            }
-            result.add(list);
-        }
-        for (List<Integer> now : result) {
-            for (Integer num : now) {
-                if (num == -1) {
-                    System.out.print("#" + " ");
-                } else {
-                    System.out.print(num + " ");
-                }
-            }
-            System.out.println();
-        }
-    }
-    //打印链表
-    public static void printListNode(ListNode r){
-        while (r!=null){
-            System.out.print(r.val +  " ");
-            r= r.next;
-        }
-    }
-    //新建链表
-    public static ListNode addListNode(int[] num){
-        ListNode r = new ListNode(0);
-        ListNode p = r;
-        for (int i =0;i<num.length;i++){
-            ListNode n = new ListNode(num[i]);
-            ListNode q = p.next;
-            p.next = n;
-            n.next = q;
-            p = p.next;
-        }
-        return r.next;
-    }
-
-    //1二维数组的查找
-    public boolean Find(int target, int[][] array) {
-        int n = array.length;
-        int m = n > 0 ? array[0].length : 0;
-        int i = n - 1, j = 0;
-        while (i >= 0 && j < m) {
-            if (array[i][j] == target) {
-                return true;
-            } else if (array[i][j] > target) {
-                i--;
-            } else {
-                j++;
-            }
-        }
-        return false;
-    }
-
-    //2替换空格
-    public String replaceSpace(StringBuffer str) {
-        return str.toString().replaceAll(" ", "%20");
-    }
-
-    //3从尾到头打印链表
-    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
-        ArrayList<Integer> list = new ArrayList<>();
-        ListNode tmp = listNode;
-        while (tmp != null) {
-            list.add(0, tmp.val);
-            tmp = tmp.next;
-        }
-        return list;
-    }
-
-    //4重建二叉树
+    // 重建二叉树
     public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < in.length; i++) {
@@ -162,38 +60,7 @@ public class Main2 {
         return root;
     }
 
-    //5两个栈实现队列
-    Stack<Integer> stack1 = new Stack<Integer>();
-    Stack<Integer> stack2 = new Stack<Integer>();
-    public void push(int node) {
-        if (stack1.isEmpty()) {
-            stack1.push(node);
-        } else {
-            while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
-            }
-            stack1.push(node);
-            while (!stack2.isEmpty()) {
-                stack1.push(stack2.pop());
-            }
-        }
-    }
-    public int pop() {
-        return stack1.pop();
-    }
-    public void push1(int node) {
-        stack1.push(node);
-    }
-    public int pop1() {
-        if (stack2.isEmpty()) {
-            while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
-            }
-        }
-        return stack2.pop();
-    }
-
-    //6旋转数组的最小数字
+    // 旋转数组的最小数字
     public int minNumberInRotateArray(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -218,26 +85,7 @@ public class Main2 {
         return array[low];
     }
 
-    //7斐波那契数列
-    public int Fibonacci(int n) {
-        if (n <= 1) {
-            return n;
-        }
-        return Fibonacci(n - 1) + Fibonacci(n - 2);
-    }
-
-    //8跳台阶
-    public int JumpFloor(int target) {
-        int[] num = new int[target + 2];
-        num[1] = 1;
-        num[2] = 2;
-        for (int i = 3; i <= target; i++) {
-            num[i] = num[i - 1] + num[i - 2];
-        }
-        return num[target];
-    }
-
-    //9变态跳台阶
+    //9 变态跳台阶
     public int JumpFloorII(int target) {
         int[] num = new int[target + 2];
         num[1] = 1;
@@ -250,6 +98,147 @@ public class Main2 {
         }
         return num[target];
     }
+
+   //  把字符串转换成整数
+   public int strToInt(String str) {
+       char[] c = str.trim().toCharArray();
+       if(c.length == 0) return 0;
+       int res = 0, bndry = Integer.MAX_VALUE / 10;
+       int i = 1, sign = 1;
+       if(c[0] == '-') sign = -1;
+       else if(c[0] != '+') i = 0;
+       for(int j = i; j < c.length; j++) {
+           if(c[j] < '0' || c[j] > '9') break;
+           if(res > bndry || res == bndry && c[j] > '7') return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+           res = res * 10 + (c[j] - '0');
+       }
+       return sign * res;
+   }
+
+   // 剪绳子
+   public int cuttingRope(int n) {
+       if(n <= 3) return n - 1;
+       int b = n % 3, p = 1000000007;
+       long rem = 1, x = 3;
+       for(int a = n / 3 - 1; a > 0; a /= 2) {
+           if(a % 2 == 1) rem = (rem * x) % p;
+           x = (x * x) % p;
+       }
+       if(b == 0) return (int)(rem * 3 % p);
+       if(b == 1) return (int)(rem * 4 % p);
+       return (int)(rem * 6 % p);
+   }
+
+   // 整数次幂
+   public double myPow(double x, int n) {
+       if(x == 0) return 0;
+       long b = n;
+       double res = 1.0;
+       if(b < 0) {
+           x = 1 / x;
+           b = -b;
+       }
+       while(b > 0) {
+           if((b & 1) == 1) res *= x;
+           x *= x;
+           b >>= 1;
+       }
+       return res;
+   }
+
+   //数字序列中某一位的数字
+   public int findNthDigit(int n) {
+       int digit = 1;
+       long start = 1;
+       long count = 9;
+       while (n > count) { // 1.
+           n -= count;
+           digit += 1;
+           start *= 10;
+           count = digit * start * 9;
+       }
+       long num = start + (n - 1) / digit; // 2.
+       return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.
+   }
+
+   // 矩阵中的路径 dfs
+   public boolean exist(char[][] board, String word) {
+       char[] words = word.toCharArray();
+       for(int i = 0; i < board.length; i++) {
+           for(int j = 0; j < board[0].length; j++) {
+               if(dfs(board, words, i, j, 0)) return true;
+           }
+       }
+       return false;
+   }
+    boolean dfs(char[][] board, char[] word, int i, int j, int k) {
+        if(i >= board.length || i < 0 || j >= board[0].length || j < 0 || board[i][j] != word[k]) return false;
+        if(k == word.length - 1) return true;
+        char tmp = board[i][j];
+        board[i][j] = '/';
+        boolean res = dfs(board, word, i + 1, j, k + 1) || dfs(board, word, i - 1, j, k + 1) ||
+                dfs(board, word, i, j + 1, k + 1) || dfs(board, word, i , j - 1, k + 1);
+        board[i][j] = tmp;
+        return res;
+    }
+
+    // 最长不含重复字符的子字符串
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> dic = new HashMap<>();
+        int i = -1, res = 0;
+        for(int j = 0; j < s.length(); j++) {
+            if(dic.containsKey(s.charAt(j)))
+                i = Math.max(i, dic.get(s.charAt(j))); // 更新左指针 i
+            dic.put(s.charAt(j), j); // 哈希表记录
+            res = Math.max(res, j - i); // 更新结果
+        }
+        return res;
+    }
+
+    // 1～n整数中1出现的次数
+    public int countDigitOne(int n) {
+        int digit = 1, res = 0;
+        int high = n / 10, cur = n % 10, low = 0;
+        while(high != 0 || cur != 0) {
+            if(cur == 0) res += high * digit;
+            else if(cur == 1) res += high * digit + low + 1;
+            else res += (high + 1) * digit;
+            low += cur * digit;
+            cur = high % 10;
+            high /= 10;
+            digit *= 10;
+        }
+        return res;
+    }
+
+    // 字符串排序
+    List<String> res = new LinkedList<>();
+    char[] c;
+    public String[] permutation(String s) {
+        c = s.toCharArray();
+        dfs(0);
+        return res.toArray(new String[res.size()]);
+    }
+    void dfs(int x) {
+        if(x == c.length - 1) {
+            res.add(String.valueOf(c)); // 添加排列方案
+            return;
+        }
+        HashSet<Character> set = new HashSet<>();
+        for(int i = x; i < c.length; i++) {
+            if(set.contains(c[i])) continue; // 重复，因此剪枝
+            set.add(c[i]);
+            swap(i, x); // 交换，将 c[i] 固定在第 x 位
+            dfs(x + 1); // 开启固定第 x + 1 位字符
+            swap(i, x); // 恢复交换
+        }
+    }
+    void swap(int a, int b) {
+        char tmp = c[a];
+        c[a] = c[b];
+        c[b] = tmp;
+    }
+
 
     //10矩形覆盖
     public int RectCover(int target) {
@@ -406,11 +395,5 @@ public class Main2 {
         return  null;
     }
 
-    public static void main(String[] args) {
-        Main2 m = new Main2();
-        ListNode l1 = addListNode(new int[]{1,3,5});
-        ListNode l2 = addListNode(new int[]{2,4,6});
-        printListNode(m.Merge(l1,l2));
-    }
 
 }
