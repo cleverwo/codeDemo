@@ -5,12 +5,60 @@ package OfferDemo;
  * @Date: 2020/1/28 09:14
  * @Description:
  * 6.旋转数组的最小数字
- * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
- * 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。
- * 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
- * NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
  */
 public class Test6 {
+    //考察二分查找 二分查找的变种
+    public int minNumberInRotateArray1(int [] array) {
+        if (array==null||array.length<=0){
+            return 0;
+        }
+        int low =0;
+        int high = array.length-1;
+        int mid =0;
+        while (low<high){
+            // low < high 表示没有旋转，因为low<high 表示low-high为非递减数组,low为最小比谁都小
+            if (array[low]<array[high]){
+                return array[low];
+            }
+            mid = (low+high)/2;
+            //分3种情况：
+            //1 low < mid 则证明最小值一定在mid+1——high 中，low-mid为有序的，反转的在后面
+            //2 high < mid 则最小值在low-mid中，可能为mid，low-mid无序，mid-high有序
+            //3 mid >low mid>high 还有一个mid = low或high，此时必然是逆序的是时候，因为顺序时 l<h 已经判断了，l++即可
+            // 最终l-h指向其升序的数据，最小值为l，即low位置上的数。
+            if (array[mid]>array[low]){
+                //表示   mid为大值  low-mid有序的， mid-high 为无序的，最小的在mid-high中
+                low = mid +1;
+            }else if(array[mid]<array[high]){
+                high = mid;
+            }else{
+                low++;
+            }
+        }
+        return array[low];
+    }
+    //------------------------------------------------
+    public int minArray(int[] numbers){
+        if (numbers.length == 0){
+            return 0;
+        }
+        int l = 0, h = numbers.length-1;
+        while (l<h){
+            if (numbers[l]< numbers[h]){
+                return numbers[0];
+            }
+            int mid = l + (h-l) /2;
+            if (numbers[l]<numbers[mid]){
+                l = mid+1;
+            }else if(numbers[h] > numbers[mid]){
+                h = mid;
+            }else{
+                h--;
+            }
+        }
+        return numbers[h];
+    }
+    //-----------------------------------------------
     /**
      * 时间:O(n) 空间:O(1)
      * 暴力查找从头到尾遍历，当前数大于他的后一个数时表示有旋转
@@ -27,37 +75,7 @@ public class Test6 {
         }
         return array[0];
     }
-
-    //考察二分查找 二分查找的变种
-    public int minNumberInRotateArray1(int [] array) {
-        if (array==null||array.length<=0){
-            return 0;
-        }
-        int low =0;
-        int high = array.length-1;
-        int mid =0;
-        while (low<high){
-            // low < high 表示没有旋转，因为low<high 表示low-high为非递减数组,low为最小比谁都小
-            if (array[low]<array[high]){
-                return array[low];
-            }
-            mid = (low+high)/2;
-            //分3种情况：
-            //1 low-mid有序，mid-high无序， low<mid, 最小值在mid-high中
-            //2 low-mid无序，mid-high有序， mid<high，最小值为mid，或者在low-mid中
-            //3
-            if (array[mid]>array[low]){
-                //表示   mid为大值  low-mid有序的， mid-high 为无序的，最小的在mid-high中
-                low = mid +1;
-            }else if(array[mid]<array[high]){
-                high = mid;
-            }else{
-                low++;
-            }
-        }
-        return array[low];
-    }
-
+    //-------------------------------------------------
     public static void main(String[] args) {
         Test6 t = new Test6();
         int[] a = {10,1,10,10,10};

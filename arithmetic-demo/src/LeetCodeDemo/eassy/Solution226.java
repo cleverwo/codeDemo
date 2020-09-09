@@ -1,6 +1,5 @@
 package LeetCodeDemo.eassy;
 
-import LeetCodeDemo.link.Solution2;
 import _modal.TreeNode;
 import baseDemo.tree.TreeLevel;
 import baseDemo.tree.TreeOrder;

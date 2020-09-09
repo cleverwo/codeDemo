@@ -1,6 +1,6 @@
 package baseDemo.tree;
 
-import LeetCodeDemo.eassy.tree.Solution110;
+import LeetCodeDemo.eassy.Solution110;
 import _modal.TreeNode;
 
 /**

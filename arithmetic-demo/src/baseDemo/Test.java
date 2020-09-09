@@ -21,6 +21,24 @@ public class Test {
             arr3[i] = new int[i + 1];   //列的长度每次都变化。每次都要重新申请空间(长度)
         }
     }
+    // 打印数组
+    public void printList(){
+        int[] a = {1,1,1};
+        char[] b = {'a','b','c'};
+        String[] c = {"aa","bb"};
+        System.out.println(Arrays.toString(a));
+        System.out.println(Arrays.toString(b));
+        System.out.println(Arrays.toString(c));
+    }
+
+    // 数组转List
+    public void changeArrayToList(){
+        // int 基本数据类型不行，必须为包装类
+        Integer[] a = {1,2,3};
+        List<Integer> list =  new ArrayList<>(Arrays.asList(a));
+        list.remove(0);
+        System.out.println(list.toString());
+    }
 
     //遍历map
     public void test2() {
@@ -88,8 +106,22 @@ public class Test {
         }
     }
 
+
+    // set  转 数组
+    public static void  setToArray(){
+        Set<String> set = new HashSet<>();
+        set.add("aa");
+        set.add("bb");
+        String[] test = new String[3];
+        String[] strs = set.toArray(test);
+        System.out.println(Arrays.toString(strs));
+        System.out.println(Arrays.toString(test));
+        System.out.println(strs.equals(test));
+        System.out.println(strs == test);
+    }
+
     public static void main(String[] args) {
         Test t = new Test();
-        t.test3();
+        t.setToArray();
     }
 }

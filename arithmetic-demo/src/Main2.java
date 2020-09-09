@@ -10,56 +10,6 @@ import java.util.*;
  */
 public class Main2 {
 
-    // 重建二叉树
-    public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < in.length; i++) {
-            map.put(in[i], i);
-        }
-        TreeNode root = new TreeNode(pre[0]);
-        TreeNode t = root, pret = root;
-        int val = 0;
-        for (int i = 1; i < pre.length; i++) {
-            int now = pre[i];
-            // 从头遍历二叉树找now待插入的节点位置
-            while (t != null) {
-                pret = t;
-                if (map.get(now) < map.get(t.val)) {
-                    t = t.left;
-                    val = 0;
-                } else {
-                    t = t.right;
-                    val = 1;
-                }
-            }
-            if (val != 0) {
-                pret.right = new TreeNode(now);
-            } else {
-                pret.left = new TreeNode(now);
-            }
-            //重置t为根节点
-            t = root;
-        }
-        return root;
-    }
-    public static TreeNode reConstructBinaryTree1(int[] pre, int[] in) {
-        if (pre.length == 0 || in.length == 0) {
-            return null;
-        }
-        TreeNode root = new TreeNode(pre[0]);
-        // 在中序中找到前序的根
-        for (int i = 0; i < in.length; i++) {
-            if (in[i] == pre[0]) {
-                // 左子树，注意 copyOfRange 函数，左闭右开
-                root.left = reConstructBinaryTree(Arrays.copyOfRange(pre, 1, i + 1), Arrays.copyOfRange(in, 0, i));
-                // 右子树，注意 copyOfRange 函数，左闭右开
-                root.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i + 1, pre.length), Arrays.copyOfRange(in, i + 1, in.length));
-                break;
-            }
-        }
-        return root;
-    }
-
     // 旋转数组的最小数字
     public int minNumberInRotateArray(int[] array) {
         if (array == null || array.length == 0) {
@@ -395,5 +345,41 @@ public class Main2 {
         return  null;
     }
 
+    //求1+2+…+n
+    public int sumNums(int n) {
+        int sum=n;
+        //n=1时直接返回1
+        //短路思想，当n=0时，sum=0，&&后面的就不会执行了，直接返回sum=0
+        //逻辑或的短路特性：当||左部分的表达式为true，则不执行右部分的表达式
+        boolean flag=(sum>0)&&((sum+=sumNums(n-1))>0);
+        return sum;
+    }
 
+    // 股票的最大利润
+    public int maxProfit(int[] prices) {
+        int cost = Integer.MAX_VALUE, profit = 0;
+        for(int price : prices) {
+            cost = Math.min(cost, price);
+            profit = Math.max(profit, price - cost);
+        }
+        return profit;
+    }
+
+    // 二叉树和为某一值的路径
+    LinkedList<List<Integer>> result = new LinkedList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        recur(root, sum);
+        return result;
+    }
+    void recur(TreeNode root, int tar) {
+        if(root == null) return;
+        path.add(root.val);
+        tar -= root.val;
+        if(tar == 0 && root.left == null && root.right == null)
+            result.add(new LinkedList(path));
+        recur(root.left, tar);
+        recur(root.right, tar);
+        path.removeLast();
+    }
 }

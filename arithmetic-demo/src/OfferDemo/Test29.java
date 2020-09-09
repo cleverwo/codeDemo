@@ -2,6 +2,8 @@ package OfferDemo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * @Auther: 10413
@@ -99,5 +101,22 @@ public class Test29 {
             }
         }
         arr[k] = arr[0];
+    }
+
+    public int[] getLeastNumbers2(int[] arr,int k){
+        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        for (int i=0;i<arr.length;i++){
+            queue.offer(arr[i]);
+        }
+        int[] res = new int[k];
+        for(int i=0;i<k;i++){
+            res[i] = queue.poll();
+        }
+        return res;
     }
 }

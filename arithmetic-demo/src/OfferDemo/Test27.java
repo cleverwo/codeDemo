@@ -31,7 +31,7 @@ public class Test27 {
      * 连续使用这个方法则可从字典序最小的排列推出全部排列。
      * 时间复杂度O(n*n!)
      */
-    public ArrayList<String> Permutation1(String str) {
+    public ArrayList<String> Permutation(String str) {
         ArrayList<String> res = new ArrayList<>();
         if(str.length() == 0){
             return res;
@@ -51,6 +51,7 @@ public class Test27 {
         }
         return res;
     }
+    // 全排序算法
     public String nextString(String str){
         char [] array = str.toCharArray();
         int length = str.length();
@@ -83,52 +84,6 @@ public class Test27 {
         }
         return new String(array);
     }
-    /**
-     * 模拟字典排序
-     */
-    public ArrayList<String> permutation(String str){
-        ArrayList<String> list = new ArrayList<>();
-        if (str.length() == 0){
-            return list;
-        }
-        char[] strs = str.toCharArray();
-        Arrays.sort(strs);
-        list.add(new String(strs));
-        while (true){
-            String s = nextString1(strs);
-            if ("-1".equals(s)){
-                break;
-            }
-            list.add(s);
-        }
-        return list;
-    }
-    public String nextString1(char[] strs){
-        // step 1
-        int i = strs.length-2;
-        while(i>=0&&strs[i]>=strs[i+1]){
-            i--;
-        }
-        if (i==-1){
-            return "-1";
-        }
-        // step 2
-        int j=strs.length-1;
-        while(j>i&&strs[j]<=strs[i]){
-            j--;
-        }
-        // step 3
-        char tmp = strs[i];
-        strs[i] = strs[j];
-        strs[j] = tmp;
-        // step 4
-        for (int a=i+1,b=strs.length-1;a<b;a++,b--){
-            tmp = strs[a];
-            strs[a] = strs[b];
-            strs[b] = tmp;
-        }
-        return new String(strs);
-    }
 
     /**
      * 答案2 回溯法
@@ -137,78 +92,21 @@ public class Test27 {
      * 表示向第k个位置写值。递归的关键是维护一个剩余字符集合。
      * 没能解决重复和有序问题
      */
-    ArrayList<String> res = new ArrayList<String>();
-    HashSet<String> set = new HashSet<String>();
-    int length;
-    HashMap<Character, Integer> sta = new HashMap<Character, Integer>();
-    char [] array;
-    public ArrayList<String> Permutation2(String str) {
-        set = new HashSet<String>();
-        res = new ArrayList<String>();
-        if(str.length() == 0){
-            return new ArrayList<String>();
-        }
-        init(str);
-        int k = 0;
-        ArrayList<Character> touse = new ArrayList<Character>();
-        for(char c : array) {
-            touse.add(c);
-        }
-        next(k, touse);
-        res = new ArrayList<String>(set);
-        Collections.sort(res);
-        return res;
-    }
-    public void init(String str) {
-        length = str.length();
-        array = str.toCharArray();
-        Arrays.sort(array);
-        for (char c : array) {
-            if (sta.containsKey(c)){
-                sta.put(c, sta.get(c) + 1);
-            }else{
-                sta.put(c, 1);
-            }
-        }
-    }
-    public void next(int k, ArrayList<Character> touse) {
-        if (k == length) {
-            String s = new String(array);
-            if(!set.contains(s)){
-                set.add(new String(array));
-            }
-        }else {
-            for (int i=0; i<touse.size(); i++) {
-                char c = touse.get(i);
-                ArrayList<Character> to_use = new ArrayList<Character>(touse);
-                to_use.remove(i);
-                array[k] = c;
-                next(k + 1, to_use);
-            }
-        }
-    }
-
-    /**
-     * 递归法
-     */
     HashSet<String> res2 = new HashSet<String>();
     ArrayList<String> r = new ArrayList<String>();
-    public ArrayList<String> Permutation3(String str) {
+    int length;
+    char[] array;
+    public ArrayList<String> Permutation2(String str) {
         if(str.length() == 0){
             return new ArrayList<String>();
         }
-        init2(str);
+        length = str.length();
+        array = str.toCharArray();
+        res2 = new HashSet<String>();
         perm(0);
         r = new ArrayList<String>(res2);
         Collections.sort(r);
         return r;
-    }
-
-    public void init2(String str){
-        length = str.length();
-        array = str.toCharArray();
-        Arrays.sort(array);
-        res2 = new HashSet<String>();
     }
     public void perm(int k){
         if(k == length){
@@ -232,18 +130,41 @@ public class Test27 {
         array[j] = tmp;
     }
 
-    /**
-     * 思路：
-     * str string型转 char 对其进行全排序求解
-     * @param str
-     * @return
-     */
-    public ArrayList<String> Permutation(String str) {
-        ArrayList<String> list = new ArrayList<>();
-        if (str.length() == 0){
-            return list;
+    Set<String> set = new HashSet<>();
+    char[] temp;
+    public String[] permutation3(String s) {
+        if(s.length()==0){
+            return new String[]{};
         }
-        char[] strs = str.toCharArray();
-        return null;
+        temp = new char[s.length()];
+        int k = 0;
+        List<Character> curr = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            curr.add(s.charAt(i));
+        }
+        next(k,s.length(),curr);
+        String[] result = new String[set.size()];
+        int i = 0;
+        Iterator<String> iterator = set.iterator();
+        while(iterator.hasNext()){
+            result[i] = iterator.next();
+            i++;
+        }
+        return result;
+    }
+
+    public void next(int k,int length, List<Character> list){
+        if(k == length){
+            String s = new String(temp);
+            set.add(s);
+        }else{
+            for(int i=0;i<list.size();i++){
+                char c = list.get(i);
+                temp[k] = c;
+                List<Character> curr = new ArrayList<>(list);
+                curr.remove(i);
+                next(k+1,length,curr);
+            }
+        }
     }
 }

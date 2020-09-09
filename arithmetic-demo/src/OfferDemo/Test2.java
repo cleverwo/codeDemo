@@ -8,6 +8,20 @@ package OfferDemo;
  */
 public class Test2 {
 
+    // 新建一个数组，碰到空格用%20代替
+    public static String replaceSpace2(StringBuffer str){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0;i<str.length();i++){
+            char c = str.charAt(i);
+            if (c ==' '){
+                sb.append("%20");
+            }else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
     // 暴力破解
     public static String replaceSpace(StringBuffer str) {
        for (int i =0;i<str.length();i++){
@@ -23,20 +37,6 @@ public class Test2 {
     // string自带的函数
     public static String replaceSpace1(StringBuffer str){
         return str.toString().replaceAll(" ","%20");
-    }
-
-    // 新建一个数组，碰到空格用%20代替
-    public static String replaceSpace2(StringBuffer str){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0;i<str.length();i++){
-            char c = str.charAt(i);
-            if (c ==' '){
-                sb.append("%20");
-            }else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
     }
 
     public static void main(String[] args) {

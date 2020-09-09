@@ -15,6 +15,17 @@ public class Test8 {
         return JumpFloor(target-1)+JumpFloor(target-2);
     }
 
+    //滚动数组记录状态，优化动规
+    public int jumpFloorII2(int target){
+        int p =1,q =2,sum = 1;
+        for (int i=1;i<target;i++){
+            sum = (p+q) % 1000000007;
+            p = q;
+            q = sum;
+        }
+        return p;
+    }
+
     public static void main(String[] args) {
         Test8 t = new Test8();
         System.out.println(t.JumpFloor(4));
