@@ -10,16 +10,10 @@ import java.util.stream.Collectors;
  * @Date: 2020/2/18 10:44
  * @Description:
  * 28，数组中出现次数超过一半的数字
- * 数组中有一个数字出现的次数超过数组长度的一半，
- * 请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。
- * 由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。
  */
 public class Test28 {
     /**
-     * 思路
-     * 遍历找一半
-     * @param array
-     * @return
+     * hashmap遍历找一半
      */
     public static int MoreThanHalfNum_Solution(int [] array) {
         int length = array.length;
@@ -62,34 +56,16 @@ public class Test28 {
     }
 
     /**
-     * 答案2 多数元素
+     * 答案2 摩尔投票
      * @param array
      */
     public static int MoreThanHalfNum_Solution3(int[] array){
-        int n=0;
-        int ret=0;
-        for (int i=0;i<array.length;i++){
-            if (n==0){
-                ret = array[i];
-                n=1;
-            }else{
-                if (ret == array[i]){
-                    n++;
-                }else{
-                    n--;
-                }
-            }
+        int x = 0, votes = 0;
+        for(int num : array){
+            if(votes == 0) x = num;
+            votes += num == x ? 1 : -1;
         }
-        int count = 0;
-        for (int i=0;i<array.length;i++){
-            if (ret == array[i]){
-                count ++;
-            }
-        }
-        if (count > array.length/2){
-            return ret;
-        }
-        return 0;
+        return x;
     }
 
 

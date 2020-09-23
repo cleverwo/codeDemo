@@ -11,51 +11,6 @@ package OfferDemo;
  */
 public class Test33 {
 
-
-    /**
-     * 思路：
-     * 这道题，我知道丑数的计算方法，但我怎么确定第n个丑数
-     * 给一个数我可以判定他是不是丑数，
-     * 暴力法就是从1开始往后加，是丑数则count++
-     * count==index时候停止把改丑数返回
-     * @param index
-     * @return
-     */
-    public int GetUglyNumber_Solution(int index) {
-        if (index <= 0){
-            return 0;
-        }
-        int count = 0;
-        int result = 1;
-        int n = 1;
-        while (count!=index){
-            if(isChou(n)){
-                count++;
-                result = n;
-            }
-            n++;
-        }
-        return result;
-    }
-    public boolean isChou(int n){
-        if (n==1){
-            return true;
-        }
-        if (n%2==0){
-            int m = n/2;
-            return isChou(m);
-        }
-        if (n%3==0){
-            int m = n/3;
-            return isChou(m);
-        }
-        if (n%5==0){
-            int m = n/5;
-            return isChou(m);
-        }
-        return false;
-    }
-
     /**
      * 答案1：
      * 丑数能够分解成2^x3^y5^z，所以只需要把得到的丑数不断地乘以2、3、5之后并放入他们应该放置的位置即可
@@ -98,9 +53,44 @@ public class Test33 {
         return result[index-1];
     }
 
+    // 暴力
+    public int GetUglyNumber_Solution(int index) {
+        if (index <= 0){
+            return 0;
+        }
+        int count = 0;
+        int result = 1;
+        int n = 1;
+        while (count!=index){
+            if(isChou(n)){
+                count++;
+                result = n;
+            }
+            n++;
+        }
+        return result;
+    }
+    public boolean isChou(int n){
+        if (n==1){
+            return true;
+        }
+        if (n%2==0){
+            int m = n/2;
+            return isChou(m);
+        }
+        if (n%3==0){
+            int m = n/3;
+            return isChou(m);
+        }
+        if (n%5==0){
+            int m = n/5;
+            return isChou(m);
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         Test33 t = new Test33();
-        System.out.println(t.GetUglyNumber_Solution(9));
+        System.out.println(t.GetUglyNumber_Solution1(11));
     }
 }

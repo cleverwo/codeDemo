@@ -7,11 +7,49 @@ import java.util.Stack;
 /**
  * @Auther: 10413
  * @Date: 2020/2/15 20:48
- * @Description: 23.二叉搜索树的后序遍历
+ * @Description:
+ * 23.二叉搜索树的后序遍历
  * 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。
  * 如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。
  */
 public class Test23 {
+
+    // 递归分治
+    public boolean isVerify(int[] postorder){
+        return recur(postorder,0,postorder.length-1);
+    }
+    public boolean recur(int[] postorder, int i, int j){
+        // 下标越界
+        if (i>=j) {
+            return true;
+        }
+        // j 为头节点， p 为左子树节点， p 《 j
+        int p = i;
+        while (postorder[p] < postorder[j]){
+            p++;
+        }
+        // 找到 p》j 即 此时p为右子树， 存在 m 》 j ， m 的位置为 j 的右子树的开始下标
+        int m = p;
+        while (postorder[p] > postorder[j]){
+            p++;
+        }
+        // p == j表示  m-p为j 的右子数， i-m-1为j 的左子树
+        return p == j && recur(postorder,i,m-1) && recur(postorder,m,j-1);
+    }
+
+    // 单调栈
+    public boolean isVerify2(int[] num){
+        Stack<Integer> stack = new Stack<>();
+        int root = Integer.MAX_VALUE;
+        for(int i = num.length - 1; i >= 0; i--) {
+            if(num[i] > root) return false;
+            while(!stack.isEmpty() && stack.peek() > num[i])
+                root = stack.pop();
+            stack.add(num[i]);
+        }
+        return true;
+    }
+
 
     /**
      * 做题前先复习下二叉搜索树BST，二叉排序树
@@ -84,37 +122,6 @@ public class Test23 {
         return isBST(sequence, start, i - 1) && isBST(sequence, i, root - 1);
     }
 
-    /**
-     * 模拟练习答案1
-     */
-    public boolean verifySequenceIsBST(int[] array) {
-        if (array == null || array.length == 0) {
-            return false;
-        }
-        return isBST1(array, 0, array.length - 1);
-    }
-
-    //array为判定数组，start为数组起始坐标，end为数组结束坐标
-    public boolean isBST1(int[] array, int start, int end) {
-        //数组遍历完的标值
-        if (start >= end) {
-            return true;
-        }
-        int rootKey = array[end];
-        int i = 0;
-        while (i < end) {
-            if (array[i] > rootKey) {
-                break;
-            }
-            i++;
-        }
-        for (int j = i; j < end; j++) {
-            if (array[j] < rootKey) {
-                return false;
-            }
-        }
-        return isBST1(array, 0, i - 1) && isBST1(array, i, end - 1);
-    }
 
     /**
      * 答案2 数值上下边界判定bst 时间On 空间On
@@ -172,52 +179,5 @@ public class Test23 {
             }
             return true;
         }
-    }
-
-    /**
-     * 模拟答案2
-     */
-    public boolean verifySequenceIsBST2_2(int[] sequence) {
-        if (sequence == null || sequence.length == 0) {
-            return false;
-        }
-        int idx = sequence.length - 1;
-        Stack<Integer> bound_min = new Stack<>();
-        Stack<Integer> bound_max = new Stack<>();
-        Stack<Integer> roots = new Stack<>();
-        roots.push(sequence[idx--]);
-        bound_min.push(Integer.MIN_VALUE);
-        bound_max.push(Integer.MAX_VALUE);
-        for (; idx >=0; idx--) {
-            if (sequence[idx] > sequence[idx + 1]) {
-                // 倒序遍历趋势为递增，说明是进入了某个右子树
-                if (sequence[idx] > bound_max.peek()) {
-                    // 当前元素超越了最大上限约束，这是不合法的
-                    return false;
-                } else {
-                    // 合法，进入右子树，更新三个栈
-                    bound_min.push(roots.peek());
-                    bound_max.push(bound_max.peek());
-                    roots.push(sequence[idx]);
-                }
-            } else {
-                // 倒序遍历趋势为递减，说明是进入了某个左子树
-                if (sequence[idx] < bound_min.peek()) {
-                    // 当前元素打破了最小下限约束，说明是右子树遍历完了，跳转到兄弟左子树
-                    // 当前元素为兄弟左子树的根，之前右子树节点全部出栈
-                    while (sequence[idx] < bound_min.peek()) {
-                        bound_min.pop();
-                        bound_max.pop();
-                        roots.pop();
-                    }
-                } else {
-                } // 没有突破下限，说明是右子树不存在，直接进入左子树，不做特殊处理
-                // 进入左子树，更新三个栈
-                bound_min.push(bound_min.peek());
-                bound_max.push(roots.peek());
-                roots.push(sequence[idx]);
-            }
-        }
-        return true;
     }
 }

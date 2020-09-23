@@ -5,6 +5,7 @@ import _modal.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -16,10 +17,32 @@ import java.util.Queue;
  */
 public class Test22 {
 
+    public int[] levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList();
+        if (root ==null){
+            return new int[]{};
+        }
+        queue.offer(root);
+        List<Integer> res = new ArrayList<>();
+        while (!queue.isEmpty()){
+            TreeNode t = queue.poll();
+            if (t.left!=null){
+                queue.offer(t.left);
+            }
+            if (t.right!=null){
+                queue.offer(t.right);
+            }
+            res.add(t.val);
+        }
+        int[] ans = new int[res.size()];
+        for (int i=0;i<res.size();i++){
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+
     /**
      * 二叉数的层次遍历
-     * @param root
-     * @return
      */
     public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
         ArrayList<Integer> list = new ArrayList<>();
@@ -43,6 +66,5 @@ public class Test22 {
             list.add(b.val);
         }
         return list;
-
     }
 }

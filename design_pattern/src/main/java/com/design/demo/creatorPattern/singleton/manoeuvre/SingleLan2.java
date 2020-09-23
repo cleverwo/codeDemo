@@ -3,7 +3,7 @@ package com.design.demo.creatorPattern.singleton.manoeuvre;
 /**
  * @Auther: wangzhendong
  * @Date: 2019/7/25 15:32
- * @Description: 单例模式--懒汉式（线程安全）
+ * @Description: 单例模式--懒汉式（线程安全） 双检索不是线程安全的单例，可能导致死锁
  * 多线程环境下的懒汉式单例模式(DCL，双检锁实现)
  * 由于指令可能重排序，即DCL可能会返回一个并不完整的对象。
  */

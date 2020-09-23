@@ -7,21 +7,10 @@ import _modal.ListNode;
  * @Date: 2020/2/20 12:07
  * @Description:
  * 36,两个链表的第一个公共节点
- * 输入两个链表，找出它们的第一个公共结点。
- * （注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）
  */
 public class Test36 {
 
-    /**
-     * 思路：
-     * 双指针遍历的前提时两个链表有序
-     * 这里两个无序的链表找相同的节点的难点在：
-     * 第一个公共节点之后的节点肯定也是公共的，
-     * 笨办法，先遍历2个链表求长度，在让长的先走，在判断是不是公共节点
-     * @param pHead1
-     * @param pHead2
-     * @return
-     */
+    // 暴力 多次遍历
     public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
         if(pHead1==null||pHead2==null){
             return null;
@@ -75,19 +64,18 @@ public class Test36 {
         ListNode p1 = pHead1;
         ListNode p2 = pHead2;
         while(p1!=p2){
-            p1 = p1.next;
-            p2 = p2.next;
-            if(p1 != p2){
-                if(p1 == null){
-                    p1 = pHead2;
-                }
-                if(p2 == null){
-                    p2 = pHead1;
-                }
+            if(p1 == null){
+                p1 = pHead2;
+            }else{
+                p1 = p1.next;
+            }
+            if(p2 == null){
+                p2 = pHead1;
+            }else{
+                p2 = p2.next;
             }
         }
         return p1;
-
     }
 
 

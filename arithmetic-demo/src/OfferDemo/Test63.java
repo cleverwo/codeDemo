@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
  * 如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，
  * 使用GetMedian()方法获取当前读取数据的中位数。
  */
-public class Test63 {
+public class Test63<x> {
 
     /**
      * 思路：
@@ -69,6 +69,8 @@ public class Test63 {
         }
     });
     public void Insert1(Integer num) {
+        //大顶堆存放前半段，小的数，小顶堆存放后半段 大的数
+        // 奇数个优先存到小顶堆中
         // 数量++
         cnt++;
         // 如果为奇数的话
@@ -106,27 +108,62 @@ public class Test63 {
         return res;
     }
 
+    PriorityQueue<Integer> lows = new PriorityQueue<>();
+    PriorityQueue<Integer> highs = new PriorityQueue<>((x,y)->{return y-x;});
+    int count = 0;
+    public void insertNum(int num){
+        count++;
+        if ((count & 1) == 1){
+            //奇数
+            // 小的存大的数，看看这个是不是大数
+            if (!lows.isEmpty() && num > lows.peek()){
+                int tmp = lows.poll();
+                lows.offer(num);
+                num = tmp;
+            }
+            highs.offer(num);
+        }else{
+            // 优先存了大顶堆，则偶数存在小顶堆
+            if (!highs.isEmpty() && num < highs.peek()){
+                int tmp = highs.poll();
+                highs.offer(num);
+                num = tmp;
+            }
+            low.offer(num);
+        }
+    }
+
+    public double result(){
+        if ((count & 1) == 1){
+            return (double)highs.peek();
+        }else{
+            double a = highs.peek();
+            double b = lows.peek();
+            return a + (b-a)/2;
+        }
+    }
+
 
 
     public static void main(String[] args) {
         //5,2,3,4,1,6,7,0,8
-        Insert(5);
+        Insert(1);
         System.out.println(GetMedian());
         Insert(2);
         System.out.println(GetMedian());
         Insert(3);
-        System.out.println(GetMedian());
-        Insert(4);
-        System.out.println(GetMedian());
-        Insert(1);
-        System.out.println(GetMedian());
-        Insert(6);
-        System.out.println(GetMedian());
-        Insert(7);
-        System.out.println(GetMedian());
-        Insert(0);
-        System.out.println(GetMedian());
-        Insert(8);
-        System.out.println(GetMedian());
+//        System.out.println(GetMedian());
+//        Insert(4);
+//        System.out.println(GetMedian());
+//        Insert(1);
+//        System.out.println(GetMedian());
+//        Insert(6);
+//        System.out.println(GetMedian());
+//        Insert(7);
+//        System.out.println(GetMedian());
+//        Insert(0);
+//        System.out.println(GetMedian());
+//        Insert(8);
+//        System.out.println(GetMedian());
     }
 }

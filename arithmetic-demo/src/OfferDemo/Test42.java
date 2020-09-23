@@ -15,13 +15,30 @@ import java.util.List;
  */
 public class Test42 {
 
+    // 双指针
+    public ArrayList<Integer> FindNumbersWithSum1(int[] array, int sum) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        if (array.length < 2) {
+            return arrayList;
+        }
+        int slow = 0,high = array.length-1;
+        while(slow<high){
+            int current = array[slow]+array[high];
+            if (current<sum){
+                slow++;
+            }else if(current>sum){
+                high--;
+            }else{
+                arrayList.add(array[slow]);
+                arrayList.add(array[high]);
+                break;
+            }
+        }
+        return arrayList;
+    }
+
     /**
-     * 思路：
      * 利用一个hashmap
-     *
-     * @param array
-     * @param sum
-     * @return
      */
     public ArrayList<Integer> FindNumbersWithSum(int[] array, int sum) {
         ArrayList<Integer> resultList = new ArrayList<>();
@@ -56,53 +73,6 @@ public class Test42 {
             resultList.add(map.get(result));
         }
         return resultList;
-    }
-
-    /**
-     * 答案1：
-     * 同样利用双指针，不同41题的是，指针的起始点为开头和结尾
-     *
-     * @param array
-     * @param sum
-     * @return
-     */
-    /**
-     *     if(array.length<2) return [];
-     *     var slow=0;var high = array.length-1;var list = [];
-     *     while(slow<high){
-     *     var current = array[slow]+array[high];
-     *     if(current<sum){
-     *         slow++
-     *     }else if(current>sum){
-     *         high--;
-     *     }else if(current==sum){
-     *         list.push(array[slow]);
-     *         list.push(array[high]);
-     *         break;
-     *     }
-     *     }
-     *
-     *     return list;
-     *     */
-    public ArrayList<Integer> FindNumbersWithSum1(int[] array, int sum) {
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        if (array.length < 2) {
-            return arrayList;
-        }
-        int slow = 0,high = array.length-1;
-        while(slow<high){
-            int current = array[slow]+array[high];
-            if (current<sum){
-                slow++;
-            }else if(current>sum){
-                high--;
-            }else{
-                arrayList.add(array[slow]);
-                arrayList.add(array[high]);
-                break;
-            }
-        }
-        return arrayList;
     }
 
     public static void main(String[] args) {

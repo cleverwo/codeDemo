@@ -9,44 +9,11 @@ import java.util.Stack;
  * @Date: 2020/2/15 12:51
  * @Description:
  * 20.包含min函数的栈
- * 定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。
  */
 public class Test20 {
-    /**
-     * 定义栈的数据结构，栈先进后出
-     * 错误做法，自己瞎想的
-     */
-    List<Integer> stacklist = new ArrayList();
-    int num =0;
-    public void push(int node) {
-        stacklist.add(node);
-        this.num ++;
-
-    }
-    public void pop() {
-        stacklist.remove(this.num--);
-    }
-    public int top() {
-        return stacklist.get(this.num);
-    }
-    public int min() {
-        int min = stacklist.get(this.num-1);
-        for (int i=0;i<this.num-1;i++){
-            if (stacklist.get(i)<min){
-                min = stacklist.get(i);
-            }
-        }
-        return min;
-    }
-
-    /**
-     * 一个用来存所有的元素“stackTotal”,另一个用来存加入新的元素后当前stackTotal中对应的最小值。
-     * 两个栈中的元素数量始终保持一致，当新的元素小于“stackLittle”栈顶元素时，“stackLittle”像栈顶push新来的元素，否则，“stackLittle”向栈顶加入原栈顶元素。
-     * 执行“pop”方法时，两个栈同时弹出各自的栈顶元素。
-     *
-     * little栈用来存最小值，total用来存栈内元素，little与total的元素对应关系是
-     * 入栈total元素--对应当前total的最小值入栈little
-     * 这样total出栈后，littel栈出栈元素为对应这个total出栈元素在栈内时的最小值
+    /*
+       stackTotal 正常存储元素
+       stackLittle 存储stackTotal对应的最小元素
      */
     // 存元素
     Stack<Integer> stackTotal = new Stack<Integer>();
@@ -80,11 +47,13 @@ public class Test20 {
         return stackLittle.peek();
     }
 
-    /**
-     * 对上一个方法的改进
-     * 不用保证little栈的元素和total栈元素相同
-     * 在total出栈时判断，little的栈顶元素是否和total出栈元素相同，相同则出栈，不同不出栈
-     * 这里就是把little栈在total栈入栈时的元素不是最小值的时候，littel不在入栈，节省little的空间
+    /*
+        改进push 和 pop 方法，
+        stackLittle 不在与stackTotal 一一对应，
+        而是当 top > newNode 时入栈little
+        否则不入 little 只入total 这时元素total 与 little 栈顶元素不相同
+        出栈时判断，栈顶元素不同则只出战total，
+        相同 则little 和total 一块出栈。
      */
     //最修改了pop和push方法
     public void push2_2(int node){
@@ -114,12 +83,10 @@ public class Test20 {
      * 而单栈中会让做过最小值元素也存到该栈中，令stack栈有冗余元素，
      * 实质是将little栈存的元素放到了stack来，stack即存了栈内元素，也存了最小元素
      * 因为栈内元素是无法获取到，所以用min来表示了最小值
-     *
      */
     Stack<Integer> stack = new Stack<Integer>();
     //默认最小值时int的最大值
     Integer minElement = Integer.MAX_VALUE;
-
     public void push3(int node) {
         if(stack.empty()){
             // 栈空初始化最小值，最小值入栈
@@ -167,6 +134,8 @@ public class Test20 {
         return minElement;
     }
 
+
+    //-------------------------------------------------------
     public static void main(String[] args) {
         Test20 t = new Test20();
         //["PSH3","MIN","PSH4","MIN","PSH2","MIN","PSH3","MIN","POP","MIN","POP","MIN","POP","MIN","PSH0","MIN"]

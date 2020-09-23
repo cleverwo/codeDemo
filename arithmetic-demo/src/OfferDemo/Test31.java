@@ -5,18 +5,11 @@ package OfferDemo;
  * @Date: 2020/2/18 16:53
  * @Description:
  * 31，整数中1出现的次数（从1到n整数中1出现的次数）
- * 求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？
- * 为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。
- * ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数
- * （从1 到 n 中1出现的次数）。
  */
 public class Test31 {
 
+    // 暴力
     public int NumberOf1Between1AndN_Solution(int n) {
-        return 0;
-    }
-
-    public int NumberOf1Between1AndN_Solution2(int n) {
         int count = 0;
         for (int i = n; i > 0; i--) {
             // 效率太低，对每个数计算有多少个1
@@ -48,17 +41,32 @@ public class Test31 {
     public int NumberOf1Between1AndN_Solution1(int n) {
         int cnt = 0;
         for (int m = 1; m <= n; m *= 10) {
-            int a = n / m, b = n % m;
+            int a = n / m; // a 为基数，m 为个 十 百。。。
+            int b = n % m; // a整除 的基数中不包含 后续的余数，余数要在判断
             int c = (a+8)/10;
             int d = a%10 == 1?b+1:0;
             cnt += c * m + d;
         }
         return cnt;
     }
+    public int countDigitOne(int n) {
+        int digit = 1, res = 0;
+        int high = n / 10, cur = n % 10, low = 0;
+        while(high != 0 || cur != 0) {
+            if(cur == 0) res += high * digit;
+            else if(cur == 1) res += high * digit + low + 1;
+            else res += (high + 1) * digit;
+            low += cur * digit;
+            cur = high % 10;
+            high /= 10;
+            digit *= 10;
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Test31 t = new Test31();
-        System.out.println(t.NumberOf1Between1AndN_Solution2(216));
+        System.out.println(t.countDigitOne(1410065408));
     }
 
 }

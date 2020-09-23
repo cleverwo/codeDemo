@@ -14,29 +14,6 @@ package OfferDemo;
 public class Test51 {
 
     /**
-     * 思路：
-     * 直接遍历暴力求解
-     */
-    public int[] multiply(int[] A) {
-        if(A==null||A.length==0){
-            return null;
-        }
-        int n = A.length;
-        int[] b = new int[n];
-        for (int i=0;i<n;i++){
-            int sum = 1;
-            for (int j=0;j<i;j++){
-                sum *= A[j];
-            }
-            for (int j=i+1;j<n;j++){
-                sum *= A[j];
-            }
-            b[i] = sum;
-        }
-        return b;
-    }
-
-    /**
      * 答案：
      * b的构造是一个三角
      * b0:  1   a1  a2  a3  a4  ... an-2    an-1
@@ -75,6 +52,5 @@ public class Test51 {
 
     public static void main(String[] args) {
         Test51 t =new Test51();
-        t.multiply(new int[]{1,2,3,4,5});
     }
 }

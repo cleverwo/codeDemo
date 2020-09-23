@@ -1,6 +1,10 @@
 package OfferDemo;
 
 import _modal.ListNode;
+import _modal.TreeNode;
+
+import java.util.List;
+import java.util.Stack;
 
 /**
  * @Auther: 10413
@@ -11,12 +15,7 @@ import _modal.ListNode;
  */
 public class Test14 {
 
-    /**
-     * 暴力破解
-     * @param head
-     * @param k
-     * @return
-     */
+    // 暴力
     public ListNode FindKthToTail(ListNode head, int k) {
         int length = 0;
         ListNode p = head;
@@ -37,10 +36,27 @@ public class Test14 {
         return p;
     }
 
-    /**
-     * 快慢指针思想
-     * @return
-     */
+    // 快慢指针
+    public ListNode getKthFromEnd(ListNode head,int k){
+        ListNode quick = head, slow = head;
+        if (head == null){
+            return null;
+        }
+        while (k>0){
+            if (quick != null){
+                quick = quick.next;
+                k--;
+            }else{
+                return null;
+            }
+        }
+        while (quick!=null&&slow!=null){
+            quick = quick.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+    // 快慢指针 先判断fast后判断k
     public ListNode FindKthToTail2(ListNode head,int k){
         // 慢指针 result 指向结果
         ListNode result=head;
@@ -63,23 +79,9 @@ public class Test14 {
         return result;
     }
 
-    public ListNode FindKthToTail2_2(ListNode head,int k){
-        ListNode result,fast;
-        result=fast=head;
-        while (fast!=null){
-            //让fast先走k步
-            if (k<=0){
-                result=result.next;
-            }
-            k--;
-            fast=fast.next;
-        }
-        return k<=0?result:null;
-    }
-
     public static void main(String[] args) {
-        ListNode home = new ListNode(0);
-        ListNode pre = home;
+        ListNode root = new ListNode(0);
+        ListNode pre = root;
         int i = 1;
         while(i < 10){
             pre.next = new ListNode(i);

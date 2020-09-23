@@ -1,46 +1,50 @@
 package OfferDemo;
 
 
+import _modal.ListDequeNode;
 import _modal.TreeNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: 10413
  * @Date: 2020/2/17 11:05
- * @Description: 26, 二叉搜索树与双向链表
- * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。
- * 要求不能创建任何新的结点，只能调整树中结点指针的指向。
+ * @Description:
+ * 26, 二叉搜索树与双向链表
+ *
+ * 二叉搜索树 变 线索二叉树
  */
 public class Test26 {
 
-    /**
-     * 分析：
-     * Bst 是 左《根《右，其中序遍历为一个升序数组
-     */
-    public TreeNode Convert(TreeNode pRootOfTree) {
-        if (pRootOfTree == null) {
+    public ListDequeNode treeToDoublyList(ListDequeNode root){
+        List<ListDequeNode> list = new ArrayList<>();
+        // 中序遍历
+        inOrder(root,list);
+        if (list.size() == 0){
             return null;
         }
-        //先中序遍历二叉树，把结果存起来
-        ArrayList<TreeNode> list = new ArrayList<>();
-        inOrder(pRootOfTree, list);
-        TreeNode newHead = list.get(0);
-        //遍历数组，修改指针
-        for (int i = 0; i < list.size() - 1; i++) {
-            TreeNode pre = list.get(i);
-            TreeNode p = list.get(i + 1);
-            pre.right = p;
-            p.left = pre;
+        // 树变链表
+        for (int i=0;i<list.size();i++){
+            ListDequeNode p = list.get(i);
+            if (i == list.size()-1){
+                p.right = list.get(0);
+            }else{
+                p.right = list.get(i+1);
+            }
+            if (i==0){
+                p.left = list.get(list.size()-1);
+            }else{
+                p.left = list.get(i-1);
+            }
         }
-        return newHead;
+        return list.get(0);
     }
-
-    public void inOrder(TreeNode t, ArrayList<TreeNode> list) {
-        if (t != null) {
-            inOrder(t.left, list);
-            list.add(t);
-            inOrder(t.right, list);
+    public void inOrder(ListDequeNode root,List<ListDequeNode> list){
+        if (root!=null){
+            inOrder(root.left,list);
+            list.add(root);
+            inOrder(root.right,list);
         }
     }
 
@@ -51,55 +55,22 @@ public class Test26 {
      * 用pre指针指向中序遍历的倒数第一知道第一个节点，root节点指向pre的前一个节点
      * 从而达到指针的修改
      */
-    TreeNode pre = null;
-
+    TreeNode pree = null;
     public TreeNode Convert1(TreeNode pRootOfTree) {
         if (pRootOfTree == null) {
             return null;
         }
         Convert1(pRootOfTree.right);
         // 这里递归到最后，pre指针会按 右子树，根节点，左子树的顺序，相当于中序遍历的逆运行。
-        if (pre == null)
-            pre = pRootOfTree;
+        if (pree == null)
+            pree = pRootOfTree;
         else {
-            pRootOfTree.right = pre;
-            pre.left = pRootOfTree;
-            pre = pRootOfTree;
+            pRootOfTree.right = pree;
+            pree.left = pRootOfTree;
+            pree = pRootOfTree;
         }
         Convert1(pRootOfTree.left);
-        return pre;
-    }
-
-    /**
-     * 模拟答案1
-     * 解题有错误，无法处理pre节点位置
-     *
-     * @param pRootOfTree
-     * @return
-     */
-    public TreeNode Convert1_1(TreeNode pRootOfTree) {
-        if (pRootOfTree == null) {
-            return null;
-        }
-        TreeNode pree = null;
-        pree = rightConvert(pRootOfTree, pree);
         return pree;
-    }
-
-    public TreeNode rightConvert(TreeNode t, TreeNode pre) {
-        if (t == null) {
-            return null;
-        }
-        rightConvert(t.right, pre);
-        if (pre == null) {
-            pre = t;
-        } else {
-            t.right = pre;
-            pre.left = t;
-            pre = t;
-        }
-        rightConvert(t.left, pre);
-        return pre;
     }
 
     /**
@@ -119,38 +90,38 @@ public class Test26 {
      * 因为他传递的是里面值的引用，不是对象的传递。对象在java的方法中不会传递的。
      * 传递的总是值，一种是只是值的传递，另一种是值的地址的传递，不存在对象传递。
      */
-    TreeNode lastNodeList = null;
-
-    public TreeNode Convert2(TreeNode pRootOfTree) {
-        inOrderConvert(pRootOfTree);
-        //寻找链表头节点
-        while (lastNodeList != null && lastNodeList.left != null) {
-            lastNodeList = lastNodeList.left;
-        }
-        return lastNodeList;
+    TreeNode pre,head = null;
+    public TreeNode Convert2(TreeNode root) {
+        if (root ==null) return null;
+        inOrderConvert(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
     }
-    public void inOrderConvert(TreeNode root) {
-        if (root == null) {
+    public void inOrderConvert(TreeNode curr) {
+        if (curr == null) {
             return;
         }
-        inOrderConvert(root.left);
-        root.left = lastNodeList;
-        if (lastNodeList != null) {
-            lastNodeList.right = root;
+        inOrderConvert(curr.left);
+        if (pre !=null) {
+            pre.right = curr;
+        }else{
+            head = curr;
         }
-        lastNodeList = root;
-        inOrderConvert(root.right);
+        curr.left = pre;
+        pre = curr;
+        inOrderConvert(curr.right);
     }
 
     public static void main(String[] args) {
-        TreeNode t = new TreeNode(4);
-        t.left = new TreeNode(2);
-        t.right = new TreeNode(10);
-        t.left.left = new TreeNode(1);
-        t.right.left = new TreeNode(7);
-        t.right.right = new TreeNode(11);
         Test26 tp = new Test26();
-        TreeNode end = tp.Convert1_1(t);
+        ListDequeNode t = new ListDequeNode(4);
+        t.left = new ListDequeNode(2);
+        t.right = new ListDequeNode(10);
+        t.left.left = new ListDequeNode(1);
+        t.right.left = new ListDequeNode(7);
+        t.right.right = new ListDequeNode(11);
+        ListDequeNode end = tp.treeToDoublyList(t);
         System.out.println(end);
     }
 

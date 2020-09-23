@@ -20,51 +20,52 @@ import java.util.Queue;
  */
 public class Test61 {
 
-    /**
-     * 思路：
-     * 序列化可以看作层次遍历加上空的字符，反序列化可以看作层次遍历建二叉树
-     * 怎么做的序列化后能够先序，中序，后序，层序修改？
-     *
-     * @param root
-     * @return
-     */
-    ArrayList<Integer> list = new ArrayList<>();
-
-    String Serialize(TreeNode root) {
+    // 序列化dfs
+    public String serialize(TreeNode root) {
         if (root == null) {
-            return "";
+            return "[]";
         }
+        StringBuffer res = new StringBuffer("[");
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode t = queue.poll();
-                if (t == null) {
-                    list.add(-1);
-                }else{
-                    list.add(t.val);
-                    queue.offer(t.left);
-                    queue.offer(t.right);
-                }
-            }
-        }
-        StringBuilder string = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == -1) {
-                string.append("#");
+            TreeNode node = queue.poll();
+            if (node != null) {
+                res.append(node.val + ",");
+                queue.offer(node.left);
+                queue.offer(node.right);
             } else {
-                string.append(list.get(i));
+                res.append("null,");
             }
         }
-        string.append("!");
-        return string.toString();
+        res.deleteCharAt(res.length() - 1);
+        res.append("]");
+        return res.toString();
     }
-
-    TreeNode Deserialize(String str) {
-        return null;
+    public TreeNode deserialize(String data) {
+        if (data.equals("[]")){
+            return null;
+        }
+        String[] vals = data.substring(1,data.length()-1).split(",");
+        TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int i = 1;
+        while (!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            if (!vals[i].equals("null")){
+                node.left = new TreeNode(Integer.parseInt(vals[i]));
+                queue.offer(node.left);
+            }
+            i++;
+            if (!vals[i].equals("null")){
+                node.right = new TreeNode(Integer.parseInt(vals[i]));
+                queue.offer(node.right);
+            }
+            i++;
+        }
+        return root;
     }
-
 
     /**
      * 答案：
@@ -76,18 +77,18 @@ public class Test61 {
      * 这实质是先序遍历二叉树
      * 1,2,4,#,#,#,3,5,#,#,6,#,#
      */
-    public String Serialize1(TreeNode root) {
+    public String Serialize(TreeNode root) {
         if (root == null) {
             return "#";
         } else {
-            return root.val + "," + Serialize1(root.left) + "," + Serialize1(root.right);
+            return root.val + "," + Serialize(root.left) + "," + Serialize(root.right);
         }
     }
 
     /**
      * 使用index来设置树节点的val值，递归遍历左节点和右节点，如果值是#则表示是空节点，直接返回
      */
-    TreeNode Deserialize1(String str) {
+    public TreeNode Deserialize(String str) {
         String[] s = str.split(",");//将序列化之后的序列用，分隔符转化为数组
         index++;//索引每次加一
         int len = s.length;
@@ -119,7 +120,7 @@ public class Test61 {
 
         Test61 t = new Test61();
 
-        String str = t.Serialize1(treeNode1);
+        String str = t.Serialize(treeNode1);
         System.out.println(str);
 //        TreeNode treeNode = serializeTree.Deserialize(str);
     }

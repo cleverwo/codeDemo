@@ -2,8 +2,12 @@ package OfferDemo;
 
 
 import _modal.TreeNode;
+import baseDemo.tree.TreeOrder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -47,20 +51,38 @@ public class Test4 {
         return t;
     }
 
+    //dfs 递归
+    Map<Integer,Integer> map = new HashMap<>();
+    public TreeNode buildTree(int[] pre,int[] in){
+        if (pre.length !=in.length){
+            throw new RuntimeException("异常");
+        }
+        if (in.length == 0){
+            return  null;
+        }
+        for (int i=0;i<in.length;i++){
+            map.put(in[i],i);
+        }
+        TreeNode t = dfs(pre,0,pre.length-1,in,0,in.length-1);
+        return t;
+    }
+    public TreeNode dfs(int[] pre,int preStart, int preEnd,int[] in, int inStart,int inEnd){
+        if (preStart>preEnd || inStart> inEnd){
+            return null;
+        }
+        TreeNode t = new TreeNode(pre[preStart]);
+        int index = map.get(pre[preStart]);
+        t.left = dfs(pre,preStart+1,index-inStart+preStart,in,inStart,index-1);
+        t.right = dfs(pre,index-inStart+preStart+1,preEnd,in,index+1,inEnd);
+        return t;
+    }
+
     public static void main(String[] args) {
         int[] pre = {1, 2, 3, 4, 5, 6, 7};
         int[] in = {3, 2, 4, 1, 6, 5, 7};
         TreeNode treeNode = reConstructBinaryTree(pre, in);
-        InOrder(treeNode);
+        List<Integer> list = new ArrayList<>();
+        TreeOrder.inOrder(treeNode,list);
 
-    }
-
-    // 中序遍历
-    public static void InOrder(TreeNode t) {
-        if (t != null) {
-            InOrder(t.left);
-            System.out.print(t.val + " ");
-            InOrder(t.right);
-        }
     }
 }
