@@ -52,6 +52,13 @@ public class Test4 {
     }
 
     //dfs 递归
+    /*
+    1 map 存中序
+    2 dfs 遍历， 入参为前序，起始位置，中序，起始位置
+    3 dfs 核心， 判合法， 位置不合法结束
+                位置相同，出空
+                记录prestart 位置，判断 下一次dfs的起始位置。
+     */
     Map<Integer,Integer> map = new HashMap<>();
     public TreeNode buildTree(int[] pre,int[] in){
         if (pre.length !=in.length){

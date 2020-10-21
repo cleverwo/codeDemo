@@ -22,6 +22,7 @@ public class Test7 {
         return Fibonacci(n-1)+Fibonacci(n-2);
     }
 
+    // 滚动数组
     public int Fib1(int n){
         int[] dp = new int[40];
         dp[0] = 0;

@@ -8,20 +8,6 @@ package OfferDemo;
  */
 public class Test31 {
 
-    // 暴力
-    public int NumberOf1Between1AndN_Solution(int n) {
-        int count = 0;
-        for (int i = n; i > 0; i--) {
-            // 效率太低，对每个数计算有多少个1
-            for (int j = i; j > 0; j /= 10) {
-                if (j % 10 == 1) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
     /**
      * 答案：
      * 思路是分别计算个位、十位、百位........上出现 1 的个数。

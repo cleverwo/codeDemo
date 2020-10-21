@@ -24,7 +24,7 @@ public class Test21 {
             //入栈
             stack.push(pushA[i]);
             //遍历数组popA 判断栈顶元素是否出栈，不是则继续入栈
-            while (j<popA.length&&stack.peek()==popA[j]){
+            while (j<popA.length&&!stack.isEmpty()&&stack.peek()==popA[j]){
                 //相同出栈
                 stack.pop();
                 j++;
@@ -51,7 +51,9 @@ public class Test21 {
         Stack<Integer> stack = new Stack<>();
         int j = 0;
         for (int i = 0; i < pushA.length; i++) {
+            //入栈
             stack.push(pushA[i]);
+            //遍历数组popA 判断栈顶元素是否出栈，不是则继续入栈
             while (!stack.isEmpty() && stack.peek() == popA[j]){
                 stack.pop();
                 j++;

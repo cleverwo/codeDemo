@@ -73,7 +73,7 @@ public class Test14 {
             }
         }
         if (k>0){
-            // k>0,表示fast在k步没走完就到底了证明不参战倒数第k个节点
+            // k>0,表示fast在k步没走完就到底了证明不存在倒数第k个节点
             return null;
         }
         return result;

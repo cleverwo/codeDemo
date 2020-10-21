@@ -50,6 +50,16 @@ public class Test11 {
         }
         return num;
     }
+    public static int result(int n){
+        int num =0,flag = 1;
+        while (n != 0){
+            if ((n&flag)!=0){
+                num ++;
+            }
+            n >>>=1;
+        }
+        return num;
+    }
 
     /**
      * 独特解：
