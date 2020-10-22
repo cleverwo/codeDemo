@@ -57,7 +57,6 @@ public class Test63<x> {
     /**
      * 答案：
      * 利用小根堆存数据
-     *
      */
     private int cnt = 0;
     private PriorityQueue<Integer> low = new PriorityQueue<>();

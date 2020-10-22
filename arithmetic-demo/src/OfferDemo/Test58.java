@@ -16,36 +16,6 @@ import java.util.ArrayList;
 public class Test58 {
 
     /**
-     * 思路：
-     * 中序遍历是对称的
-     * 错误：
-     * 碰到值一样的二叉树就完了，如{5,5,5,5,#,#,5,5,#,5}
-     * @param pRoot
-     * @return
-     */
-    ArrayList<Integer> list = new ArrayList<>();
-    boolean isSymmetrical(TreeNode pRoot) {
-        if(pRoot == null){
-            return false;
-        }
-        InOrder(pRoot);
-        for (int i=0,j=list.size()-1;i<=j;i++,j--){
-            if (list.get(i)!=list.get(j)){
-                return false;
-            }
-        }
-        return true;
-    }
-    public void InOrder(TreeNode t){
-        if (t!=null){
-            InOrder(t.left);
-            list.add(t.val);
-            InOrder(t.right);
-        }
-    }
-
-
-    /**
      * 答案：
      * 就是按题意先画一棵“大”一点的对称二叉树，然后按树的一层一层比较一下，看看怎么算是满足对称的二叉树，思路就有了。
      */

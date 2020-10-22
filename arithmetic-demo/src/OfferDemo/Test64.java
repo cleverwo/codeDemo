@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class Test64 {
 
+
     // 堆排序
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums.length == 0 || k==0){
@@ -33,6 +34,36 @@ public class Test64 {
         }
         return res;
     }
+
+    public ArrayList<Integer> maxInWindows_0(int [] num, int size) {
+        ArrayList<Integer> list = new ArrayList<>();
+        if (num==null||num.length==0||size<=0||size>num.length){
+            return list;
+        }
+        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            //规定队列从大到小排序
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        for (int i=0;i<size;i++){
+            queue.offer(num[i]);
+        }
+        list.add(queue.peek());
+        //在遍历数组
+        for (int i=size;i<num.length;i++){
+            //先出元素，重置大小值
+            if (queue.peek().equals(num[i - size])){
+                queue.poll();
+            }
+            //在如元素，比较大小值，赋值大小值
+            queue.offer(num[i]);
+            list.add(queue.peek());
+        }
+        return list;
+    }
+
 
     /**
      * 思路：
@@ -84,41 +115,14 @@ public class Test64 {
         }
         return list;
     }
-    public ArrayList<Integer> maxInWindows_0(int [] num, int size) {
-        ArrayList<Integer> list = new ArrayList<>();
-        if (num==null||num.length==0||size<=0||size>num.length){
-            return list;
-        }
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            //规定队列从大到小排序
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1);
-            }
-        });
-        for (int i=0;i<size;i++){
-            queue.offer(num[i]);
-        }
-        list.add(queue.peek());
-        //在遍历数组
-        for (int i=size;i<num.length;i++){
-            //先出元素，重置大小值
-            if (queue.peek().equals(num[i - size])){
-                queue.poll();
-            }
-            //在如元素，比较大小值，赋值大小值
-            queue.offer(num[i]);
-            list.add(queue.peek());
-        }
-        return list;
-    }
+
 
     public static void main(String[] args) {
         //[2,3,4,2,6,2,5,1],3
         //[16,14,12,10,8,6,4],5
         Test64 t = new Test64();
-        int[] a = {9,10,9,-7,-4,-8,2,-6};
-        int[] res = t.maxSlidingWindow(a,5);
+        int[] a = {2,3,4,2,6,2,2,1};
+        int[] res = t.maxSlidingWindow(a,3);
         for (int i=0;i<res.length;i++){
             System.out.print(res[i] + " ");
         }

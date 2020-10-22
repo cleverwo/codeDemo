@@ -10,17 +10,6 @@ package OfferDemo;
  * 因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？
  */
 public class Test66 {
-
-    /**
-     * 思路：
-     * 到达的格子坐标 位数之和《 18
-     * 且能向上，下，左，右 移动
-     */
-    public int movingCount(int threshold, int rows, int cols){
-        return 0;
-    }
-
-
     /**
      * 答案：
      * 用dfs或bfs 来求解
@@ -53,6 +42,7 @@ public class Test66 {
         }
         return ans;
     }
+    //入参为 threadsold 为下标和的最大值，rows和cols为盒子的长和宽
     public int movingCount1(int threshold, int rows, int cols) {
         if (threshold < 0 || rows <= 0 || cols <= 0) {
             return 0;

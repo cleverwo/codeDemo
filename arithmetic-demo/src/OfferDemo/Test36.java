@@ -10,44 +10,6 @@ import _modal.ListNode;
  */
 public class Test36 {
 
-    // 暴力 多次遍历
-    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
-        if(pHead1==null||pHead2==null){
-            return null;
-        }
-        ListNode p1 =pHead1,p2=pHead2;
-        int pl1=0,pl2=0;
-        while(p1!=null){
-            pl1++;
-            p1=p1.next;
-        }
-        while(p2!=null){
-            pl2++;
-            p2=p2.next;
-        }
-        p1 = pHead1;p2=pHead2;
-        if (pl1>pl2){
-            int cha = pl1-pl2;
-            while(cha>0){
-                p1 = p1.next;
-                cha--;
-            }
-        }else{
-            int cha = pl2-pl1;
-            while(cha>0){
-                p2=p2.next;
-                cha--;
-            }
-        }
-        while(p1!=null&&p2!=null){
-            if (p1==p2){
-                return p1;
-            }
-            p1=p1.next;
-            p2=p2.next;
-        }
-        return null;
-    }
 
     /**
      * 答案1

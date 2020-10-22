@@ -18,26 +18,6 @@ package OfferDemo;
 public class Test35 {
 
     /**
-     * 思路：
-     * 从末尾遍历数组，前一个数比他大则count++
-     * 否则继续，直到遍历到第一位数
-     * 没通过时间限定，，太暴力了
-     * @param array
-     * @return
-     */
-    public static int InversePairs(int [] array) {
-        int count = 0;
-        for(int i=array.length-1;i>0;i--){
-            for (int j=i-1;j>=0;j--){
-                if (array[j]>array[i]){
-                    count++;
-                }
-            }
-        }
-        return count%1000000007;
-    }
-
-    /**
      * 答案1
      * 用归并排序思想计算
      * 归并排序使用分治策略，序列一分为二(O(1))后，将子序列递归排序(2 * T(n / 2))，

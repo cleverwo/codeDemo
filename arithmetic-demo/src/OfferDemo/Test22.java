@@ -17,6 +17,7 @@ import java.util.Queue;
  */
 public class Test22 {
 
+    // 层次遍历二叉树
     public int[] levelOrder(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList();
         if (root ==null){

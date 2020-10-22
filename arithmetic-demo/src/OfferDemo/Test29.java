@@ -12,7 +12,23 @@ import java.util.PriorityQueue;
  * 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
  */
 public class Test29 {
-
+    //大根堆
+    public int[] getLeastNumbers2(int[] arr,int k){
+        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        for (int i=0;i<arr.length;i++){
+            queue.offer(arr[i]);
+        }
+        int[] res = new int[k];
+        for(int i=0;i<k;i++){
+            res[i] = queue.poll();
+        }
+        return res;
+    }
     /**
      * 暴力求解
      * 或者；冒泡/堆排/快排/希尔排序
@@ -103,20 +119,5 @@ public class Test29 {
         arr[k] = arr[0];
     }
 
-    public int[] getLeastNumbers2(int[] arr,int k){
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1-o2;
-            }
-        });
-        for (int i=0;i<arr.length;i++){
-            queue.offer(arr[i]);
-        }
-        int[] res = new int[k];
-        for(int i=0;i<k;i++){
-            res[i] = queue.poll();
-        }
-        return res;
-    }
+
 }
