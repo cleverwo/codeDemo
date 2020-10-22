@@ -28,7 +28,7 @@ public class Test17 {
             return false;
         }
         //判断root1 == root2 或 root1的左是否=root2，root1的右是否等于root2
-        return isSubTreeNode(root1,root2)||isSubTreeNode(root1.left,root2)||isSubTreeNode(root1.right,root2);
+        return isSubTreeNode(root1,root2)||HasSubtree(root1.left,root2)||HasSubtree(root1.right,root2);
     }
     // 子结构不同子树 子结构范围更广是子树必定子结构，是子结构不一定是子树
     public boolean isSubTreeNode(TreeNode t1,TreeNode t2){
@@ -40,10 +40,10 @@ public class Test17 {
         }
         if (t1.val!=t2.val){
             //t1和t2不等，判断t1的左是否和t2相等，t1的右是否和t2相等
-            return isSubTreeNode(t1.left,t2)||isSubTreeNode(t1.right,t2);
+            return false;
         }
         //相同继续判断t1和t2的左右子树
-        return isSubTreeNode(t1.left,t2.left)&&isSubTreeNode(t1.right,t2.right);
+        return HasSubtree(t1.left,t2.left)&&HasSubtree(t1.right,t2.right);
     }
 
     /**
@@ -88,5 +88,15 @@ public class Test17 {
      * 这里是遍历b去和a作比较，所以b遍历完了证明a和b是相同的，a遍历完了证明a遍历完都没有找到和b相同的，所以失败
      */
 
+
+    public static void main(String[] args) {
+        TreeNode t = new TreeNode(1);
+        t.left = new TreeNode(0);
+        t.right = new TreeNode(1);
+        t.left.left = new TreeNode(-4);
+        t.left.right = new TreeNode(-3);
+        TreeNode b = new TreeNode(1);
+        b.left = new TreeNode(-4);
+    }
 
 }

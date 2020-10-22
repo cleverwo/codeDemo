@@ -42,8 +42,11 @@ public class Test12 {
     public static double Power3(double n,int e){
         // result用于存贮最终结果
         double result=1;
-        //对e进行绝对值运算
-        int b = e>0? e: -e;
+        //对e进行绝对值运算 b为long 因为 -2^31 int 表示不了
+        long b = e;
+        if(b<0){
+            b = -b;
+        }
         // b为指数,对指数进行位运算
         while (b!=0){
             // 取除b的低位是否为1，为1表示该位需进行幂运算，n^(2^1..)
@@ -114,6 +117,6 @@ public class Test12 {
     public static void main(String[] args) {
         Test12 t = new Test12();
         System.out.println(t.Power(2,-2));
-        System.out.println(Power3(2,-2));
+        System.out.println(Power3(1,-2147483647));
     }
 }

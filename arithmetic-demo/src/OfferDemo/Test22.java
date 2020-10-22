@@ -53,7 +53,7 @@ public class Test22 {
         }
         //初始化队列
         Queue<TreeNode> queue = new LinkedList<>();
-        // 根节点入队
+        //根节点入队
         queue.offer(root);
         //队列不为空则继续遍历
         while (!queue.isEmpty()){

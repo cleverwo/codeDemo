@@ -11,23 +11,32 @@ import java.util.Stack;
  * 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
  */
 public class Test5 {
+    /*
+    1 入队栈和出队栈
+    2 入队全放入s1中，
+    3 出队判断s2是否为空，为空s1出栈到s2中，s2在出队
+     */
     Stack<Integer> stack1 = new Stack<Integer>();
     Stack<Integer> stack2 = new Stack<Integer>();
 
     //stack1为入队栈
     public void push(int node) {
-        while(!stack2.empty()){
-            stack1.push(stack2.pop());
-        }
         stack1.push(node);
     }
 
     //stack2为出队栈
     public int pop() {
-        while(!stack1.empty()){
-            stack2.push(stack1.pop());
+        // 如果第二个栈为空
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
         }
-        return stack2.pop();
+        if (stack2.isEmpty()) {
+            return -1;
+        } else {
+            return stack2.pop();
+        }
     }
 
     public static void main(String[] args) {

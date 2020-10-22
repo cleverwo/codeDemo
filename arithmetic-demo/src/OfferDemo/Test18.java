@@ -28,7 +28,4 @@ public class Test18 {
         Mirror(root.left);
         Mirror(root.right);
     }
-    public void reverse(TreeNode t1, TreeNode t2){
-
-    }
 }

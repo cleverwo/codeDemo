@@ -38,13 +38,24 @@ public class Test23 {
     }
 
     // 单调栈
+    /*
+        后续遍历的数组特点：
+           ri > ri+1 时， ri一定为ri+1的右子节点
+           ri < ri+1 时， ri一定为某节点root的左子节点，且 root 一定为ri+1,ri+2,...rn,中 > ri 的最小值
+
+     */
     public boolean isVerify2(int[] num){
         Stack<Integer> stack = new Stack<>();
+        // 设立初始根节点
         int root = Integer.MAX_VALUE;
+        // 倒叙遍历数组
         for(int i = num.length - 1; i >= 0; i--) {
+            // 当前元素比根大，错误，所有左节点小于根
             if(num[i] > root) return false;
             while(!stack.isEmpty() && stack.peek() > num[i])
+                // 单调栈，找最小的小于根的树为新的根节点
                 root = stack.pop();
+            // 右节点入栈
             stack.add(num[i]);
         }
         return true;
@@ -101,7 +112,7 @@ public class Test23 {
         int key = sequence[root];
         int i;
         //找到左右子数的分界点，分界点左边都小于根节点，分界点右边都大于根节点，根据这个特性获取分界点
-        // 最总坐标i落到右子树的后续遍历的第一个元素上
+        //最终坐标i落到 右子树 后续遍历的第一个元素上
         for (i = start; i < root; i++) {
             if (sequence[i] > key) {
                 break;
@@ -179,5 +190,10 @@ public class Test23 {
             }
             return true;
         }
+    }
+
+    public static void main(String[] args) {
+        Test23 t = new Test23();
+        System.out.println(t.isVerify2(new int[]{1,3,2,6,4,5}));
     }
 }

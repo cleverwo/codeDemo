@@ -8,6 +8,15 @@ package OfferDemo;
  */
 public class Test6 {
     //考察二分查找 二分查找的变种
+    /*
+    1 二分查找 注意边界处理
+    2 low < high 表示没有旋转，因为low<high 表示low-high为非递减数组,low为最小比谁都小
+    3 分情况
+        1 low < mid 则证明最小值一定在mid+1——high 中，low-mid为有序的，反转的在后面
+        2 high < mid 则最小值在low-mid中，可能为mid，low-mid无序，mid-high有序
+        3 mid >low mid>high 还有一个mid = low或high，此时必然是逆序的是时候，因为顺序时 l<h 已经判断了，l++即可
+    最终l-h指向其升序的数据，最小值为l，即low位置上的数。
+     */
     public int minNumberInRotateArray1(int [] array) {
         if (array==null||array.length<=0){
             return 0;
@@ -22,11 +31,11 @@ public class Test6 {
             }
             mid = (low+high)/2;
             //分3种情况：
-            //1 low < mid 则证明最小值一定在mid+1——high 中，low-mid为有序的，反转的在后面
-            //2 high < mid 则最小值在low-mid中，可能为mid，low-mid无序，mid-high有序
-            //3 mid >low mid>high 还有一个mid = low或high，此时必然是逆序的是时候，因为顺序时 l<h 已经判断了，l++即可
+            //1 low < mid 则证明最小值一定在mid+1——high 中，low-mid为有序的，反转的在后面 l<h已经判断了
+            //2 mid < high 则最小值在low-mid中，可能为mid，low-mid无序，mid-high有序
+            //3 low >= mid mid>=high 还有一个mid = low或high，此时必然是逆序的是时候，因为顺序时 l<h 已经判断了，l++即可
             // 最终l-h指向其升序的数据，最小值为l，即low位置上的数。
-            if (array[mid]>array[low]){
+            if (array[low]<array[mid]){
                 //表示   mid为大值  low-mid有序的， mid-high 为无序的，最小的在mid-high中
                 low = mid +1;
             }else if(array[mid]<array[high]){
