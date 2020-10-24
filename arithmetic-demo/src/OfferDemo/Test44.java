@@ -81,6 +81,7 @@ public class Test44 {
         if (str == null || str.trim().length() == 0){
             return str;
         }
+        str = str.trim();
         //转char
         char[] chars = str.toCharArray();
         //反转字符
@@ -93,7 +94,9 @@ public class Test44 {
             if (chars[r] == ' ') {
                 reverseChars(chars, l, r - 1);
                 // 交换完之后,一起跳过' '
-                r++;
+                while (chars[r] == ' '){
+                    r++;
+                }
                 l = r;
             }
             if (r == str.length() - 1) {
@@ -105,6 +108,7 @@ public class Test44 {
         }
         return String.valueOf(chars);
     }
+    //双指针对调反转
     private void reverseChars(char[] chars, int l, int r) {
         while (l < r) {
             char temp = chars[l];
@@ -115,9 +119,18 @@ public class Test44 {
         }
     }
 
+    public String reverseWords(String s) {
+        String[] strs = s.trim().split(" "); // 删除首尾空格，分割字符串
+        StringBuilder res = new StringBuilder();
+        for(int i = strs.length - 1; i >= 0; i--) { // 倒序遍历单词列表
+            if(strs[i].equals("")) continue; // 遇到空单词则跳过
+            res.append(strs[i] + " "); // 将单词拼接至 StringBuilder
+        }
+        return res.toString().trim(); // 转化为字符串，删除尾部空格，并返回
+    }
 
     public static void main(String[] args) {
         Test44 t = new Test44();
-        System.out.println(t.ReverseSentence1(" "));
+        System.out.println(t.reverseWords("a good   example"));
     }
 }

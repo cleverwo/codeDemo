@@ -48,7 +48,7 @@ public class Test56 {
     }
 
     /**
-     * 答案： 思路和我一样
+     * 答案： 两个指针删重复
      */
     public ListNode deleteDuplication1(ListNode pHead){
         if(pHead == null || pHead.next == null){

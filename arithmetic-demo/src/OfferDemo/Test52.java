@@ -1,6 +1,5 @@
 package OfferDemo;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -107,13 +106,9 @@ public class Test52 {
         }
         return f[n][m];
     }
-    public boolean isMatchSub(String s,int i,String p, int j){
-        if (i == s.length() || j == p.length()){
-            if (s.length() == j){
 
-            }
-        }
-        return true;
+    public boolean isMatchs(String a, String b){
+        return matchStr(a.toCharArray(),0,b.toCharArray(),0);
     }
 
     // 递归

@@ -10,14 +10,6 @@ package OfferDemo;
 public class Test48 {
 
     /**
-     * 思路：
-     * 知道是位运算但没有思路
-     */
-    public int Add(int num1,int num2) {
-        return 1;
-    }
-
-    /**
      * 答案：
      * 异或计算 做为相加  &运算当作进位
      * 在计组中，半加器、全加器中：

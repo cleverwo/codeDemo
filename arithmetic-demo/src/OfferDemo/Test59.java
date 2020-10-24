@@ -56,7 +56,7 @@ public class Test59 {
     }
 
     /**
-     * 答案：
+     * 答案： bfs
      * 1，主要的方法与BFS写法没什么区别
      * 2，BFS里是每次只取一个，而我们这里先得到队列长度size，这个size就是这一层的节点个数，
      * 然后通过for循环去poll出这size个节点，这里和按行取值二叉树返回ArrayList<ArrayList<Integer>>这种题型的解法一样，

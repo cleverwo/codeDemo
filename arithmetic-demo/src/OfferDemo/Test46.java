@@ -13,13 +13,24 @@ import java.util.ArrayList;
  */
 public class Test46 {
 
+    // 模拟法
+    public int lastRemaining2(int n, int m){
+        ArrayList<Integer> list = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            list.add(i);
+        }
+        int idx = 0;
+        while (n > 1) {
+            idx = (idx + m - 1) % n;
+            list.remove(idx);
+            n--;
+        }
+        return list.get(0);
+    }
     /**
      * 思路：
      * 循环链表的出队问题
      * 暴力解法，模拟出列动作
-     * @param n
-     * @param m
-     * @return
      */
     public int LastRemaining_Solution(int n, int m) {
         if (n==0){
@@ -46,18 +57,16 @@ public class Test46 {
     /**
      * 答案：
      * 第二种是分析每次被删除数字的规律并直接计算圆圈中最后剩下的数字。
-     * //TODO这个答案有问题，编译不通过
      */
     public int LastRemaining_Solution1(int n, int m) {
-        if (n <= 0 || m <= 0) {
-            return -1;
+        if(n == 1){
+            return 0;
         }
         int ans = 0;
-        for (int i = 2; i <= n; i++) {
-            ans = (ans + m) % n;
+        for (int i=2;i<=n;i++){
+            ans = (ans+m) %i;
         }
         return ans;
-
     }
 
     public static void main(String[] args) {

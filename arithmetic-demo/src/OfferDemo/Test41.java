@@ -1,12 +1,13 @@
 package OfferDemo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @Auther: 10413
  * @Date: 2020/2/21 10:36
- * @Description: 41, 和为S的联系整数序列
+ * @Description: 41, 和为S的连续正数序列
  */
 public class Test41 {
 
@@ -72,7 +73,7 @@ public class Test41 {
      * 5，else 和与输入一样，存数。   【再把右指针++，求和，求剩余组合】
      * 循环结束
      */
-    public ArrayList<ArrayList<Integer>> FindContinuousSequence2(int sum) {
+    public static ArrayList<ArrayList<Integer>> FindContinuousSequence2(int sum) {
         ArrayList<ArrayList<Integer>> resp = new ArrayList<>();
         if (sum <= 0) {
             return resp;
@@ -99,7 +100,17 @@ public class Test41 {
                 sumVal += rightP;
             }
         }
-
+        int[][] rest = new int[resp.size()][];
+        for (int i=0;i<resp.size();i++){
+            rest[i] = new int[resp.get(i).size()];
+            for (int j=0;j<resp.get(i).size();j++){
+                rest[i][j] = resp.get(i).get(j);
+            }
+        }
         return resp;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(FindContinuousSequence2(3));
     }
 }

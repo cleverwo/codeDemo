@@ -12,33 +12,6 @@ import _modal.ListNode;
 public class Test55 {
 
     /**
-     * 思路：
-     * 环的入口节点是啥？？
-     * 遍历链表，环的存在，遍历遇见的第一个重复的即为入口节点
-     * 快慢指针求解
-     * 错误：
-     * 对一个链表判断是不是环可以这样写，但这里时判断一个链表中是否有环，可能存在开始不是单链，
-     * 在某节点处形成闭环，返回的时这个开始的某节点如；1-2-3-4-5-3， 返回3
-     * @param pHead
-     * @return
-     */
-    public ListNode EntryNodeOfLoop(ListNode pHead){
-        if (pHead==null||pHead.next==null){
-            return null;
-        }
-        //快慢指针，p1走一步，p2走2步
-        ListNode p1=pHead,p2=pHead;
-        while (p1!=null&&p2!=null){
-            p1=p1.next;
-            p2=p2.next.next;
-            if (p1==p2){
-                return p1;
-            }
-        }
-        return null;
-    }
-
-    /**
      * 答案
      * 这题我们可以采用双指针解法，一快一慢指针。快指针每次跑两个element，慢指针每次跑一个。如果存在一个圈，总有一天，慢指针是能追上快指针的。
      * 如下图所示，我们先找到快慢指针相遇的点，p。我们再假设，环的入口在点q，从头节点到点q距离为A，q p两点间距离为B，p q两点间距离为C。

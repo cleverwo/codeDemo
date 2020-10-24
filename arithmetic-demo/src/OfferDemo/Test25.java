@@ -35,7 +35,7 @@ public class Test25 {
         RandomListNode q;
         //一次遍历复制节点
         while (p != null) {
-            RandomListNode node = new RandomListNode(p.label);
+            RandomListNode node = new RandomListNode(p.val);
             q=p.next;
             p.next = node;
             node.next=q;
@@ -82,7 +82,7 @@ public class Test25 {
         Map<RandomListNode, RandomListNode> map = new HashMap<>();
         while (p != null) {
             if (newHead == null) {
-                newHead = new RandomListNode(pHead.label);
+                newHead = new RandomListNode(pHead.val);
                 q = newHead;
                 map.put(pHead, newHead);
             } else {
@@ -90,7 +90,7 @@ public class Test25 {
                     q.next = map.get(p.next);
                 } else {
                     if (p.next != null) {
-                        RandomListNode temp = new RandomListNode(p.next.label);
+                        RandomListNode temp = new RandomListNode(p.next.val);
                         map.put(p.next, temp);
                         q.next = temp;
                     }
@@ -99,7 +99,7 @@ public class Test25 {
                     q.random = map.get(p.random);
                 } else {
                     if (p.random != null) {
-                        RandomListNode temp = new RandomListNode(p.random.label);
+                        RandomListNode temp = new RandomListNode(p.random.val);
                         map.put(p.random, temp);
                         q.random = temp;
                     }
@@ -126,7 +126,7 @@ public class Test25 {
             // p不为空，建立p的复制，存储其对应关系,这里只执行一次，后续的判断中
             //如果不存在于map中就建立的这个节点了，所以这里相当于初始化头节点
             if (!map.containsKey(p)) {
-                newNode = new RandomListNode(p.label);
+                newNode = new RandomListNode(p.val);
                 map.put(p, newNode);
                 q = newNode;
             }
@@ -138,7 +138,7 @@ public class Test25 {
                     //p的下一节点不为空，且map中没有该节点
                     // 新建p下一节点的复制，令q.next = p.next的复制，保持了p,q下一节点的一致性
                     // map中没有这个节点的映像，保存其映像
-                    RandomListNode tmp = new RandomListNode(p.next.label);
+                    RandomListNode tmp = new RandomListNode(p.next.val);
                     q.next = tmp;
                     map.put(p.next, tmp);
                 }
@@ -148,7 +148,7 @@ public class Test25 {
                 if (map.containsKey(p.random)){
                     q.random = map.get(p.random);
                 } else {
-                    RandomListNode tmp = new RandomListNode(p.random.label);
+                    RandomListNode tmp = new RandomListNode(p.random.val);
                     q.random = tmp;
                     map.put(p.random, tmp);
                 }
@@ -175,7 +175,7 @@ public class Test25 {
         RandomListNode currentNode = pHead;
         //1、复制每个结点，如复制结点A得到A1，将结点A1插到结点A后面；
         while(currentNode != null){
-            RandomListNode cloneNode = new RandomListNode(currentNode.label);
+            RandomListNode cloneNode = new RandomListNode(currentNode.val);
             RandomListNode nextNode = currentNode.next;
             currentNode.next = cloneNode;
             cloneNode.next = nextNode;

@@ -23,35 +23,6 @@ public class Test49 {
      * @param str
      * @return
      */
-    public int StrToInt(String str) {
-        String match = "^[+\\-0-9][0-9]{1,}?";
-        boolean isLegal = Pattern.matches(match,str);
-        if (!isLegal){
-            return 0;
-        }
-        //获取数字
-        Pattern numbers = Pattern.compile("\\d+");
-        Matcher matcher = numbers.matcher(str);
-        int result = 0;
-        if (matcher.find()){
-            String num = matcher.group();
-            result = Integer.parseInt(num);
-        }
-        //获取符号
-        Pattern sign = Pattern.compile("^[+\\-]*");
-        Matcher signMatcher = sign.matcher(str);
-        int flag = 0;
-        if (signMatcher.find()){
-            String signs = signMatcher.group();
-            for (int i=0;i<signs.length();i++){
-                char c = signs.charAt(i);
-                if (c=='-'){
-                    flag++;
-                }
-            }
-        }
-        return flag%2==0?result:-result;
-    }
     //通过long来判断边界
     public int StrToInt1(String str) {
         String match = "^[+\\-0-9][0-9]{1,}?";
@@ -67,10 +38,31 @@ public class Test49 {
         return result;
     }
 
+    public int strToInt(String str) {
+        char[] c = str.trim().toCharArray();
+        if(c.length == 0) return 0;
+        int res = 0, bndry = Integer.MAX_VALUE / 10;
+        int i = 1, sign = 1;
+        if(c[0] == '-') sign = -1;
+        else if(c[0] != '+') i = 0;
+        for(int j = i; j < c.length; j++) {
+            if(c[j] < '0' || c[j] > '9') break;
+            // res > bndry 拼接的res *10 》 2147483650 越界
+            // res = bndry && c[j] > 7 表示int 越界了，放回最大值Max就行
+            if(res > bndry || res == bndry && c[j] > '7') {
+                // 可以return -1
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            res = res * 10 + (c[j] - '0');
+        }
+        return sign * res;
+    }
+
     public static void main(String[] args) {
         Test49 t = new Test49();
         //int a = Integer.parseInt("+-5");
         //System.out.println(a);
-        System.out.println(t.StrToInt("+-5"));
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(t.strToInt("-2147483648"));
     }
 }

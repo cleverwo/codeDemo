@@ -4,6 +4,7 @@ package OfferDemo;
 import _modal.TreeNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: 10413
@@ -19,7 +20,33 @@ public class Test24 {
     /**
      * 连接深度优先遍历查找路径
      */
+    // 典序的dfs剪枝算法
+    List<List<Integer>> res;
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        // 保存当前路径
+        List<Integer> curr = new ArrayList<>();
+        dfs(root, curr, sum);
+        return res;
+    }
 
+    private void dfs(TreeNode root, List<Integer> curr, int sum) {
+        if (root == null){
+            return;
+        }
+        int val = root.val;
+        curr.add(val);
+        sum -= val;
+        if (sum == 0 && root.left == null && root.right == null) {
+            res.add(new ArrayList<>(curr));
+        }
+        dfs(root.left,curr,sum);
+        dfs(root.right,curr,sum);
+        curr.remove(curr.size() - 1);
+    }
 
     /**
      * 答案1 递归
@@ -48,42 +75,6 @@ public class Test24 {
         return result;
     }
 
-    /**
-     * 模拟答案1
-     * @param root
-     * @param target
-     * @return
-     */
-    public ArrayList<ArrayList<Integer>> findPath1(TreeNode root,int target){
-        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-        if (root==null){
-            return result;
-        }
-        ArrayList<Integer> path = new ArrayList<>();
-        findO(root, target, result, path);
-        return result;
-    }
-    public void findO(TreeNode t,int target,ArrayList<ArrayList<Integer>> result,ArrayList<Integer> list){
-        //当节点为空，return
-        if (t == null) {
-            return;
-        }
-        list.add(t.val);
-        target -= t.val;
-        // 1，当目标值小于0，return
-        if(target < 0){
-            return;
-        }
-        // 2，当目标值为0 并且 节点下无其他节点, 保存并返回
-        if(target == 0 && t.left == null && t.right == null){
-            result.add(list);
-            return;
-        }
-        // 继续遍历左右节点
-        // 这里new path是因为左右都会在下次递归path.add(root.val);
-        findO(t.left, target, result, new ArrayList<>(list));
-        findO(t.right, target, result, new ArrayList<>(list));
-    }
 
     public static void main(String[] args) {
         TreeNode t = new TreeNode(5);
@@ -99,8 +90,14 @@ public class Test24 {
         t1.right=t3;
         t2.right=t5;
         t5.right=t6;
-        Test24 test24 = new Test24();
-        ArrayList<ArrayList<Integer>> list = test24.findPath1(t,10);
+        Test24 o = new Test24();
+        ArrayList<ArrayList<Integer>> list = o.FindPath(t,10);
         System.out.println(list.toString());
+
+        Test61 treeBuild = new Test61();
+        String test = "[5,4,8,11,null,13,4,7,2,null,null,5,1,null,null,null,null,null,null,null,null]";
+        TreeNode tt = treeBuild.deserialize(test);
+        List<List<Integer>> list2 = o.pathSum(tt, 22);
+        System.out.println(list2.toString());
     }
 }

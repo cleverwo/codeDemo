@@ -6,11 +6,11 @@ package _modal;
  * @Description: 复杂链表结点
  */
 public class RandomListNode {
-    public int label;
+    public int val;
     public RandomListNode next = null;
     public RandomListNode random = null;
 
-    public RandomListNode(int label) {
-        this.label = label;
+    public RandomListNode(int val) {
+        this.val = val;
     }
 }

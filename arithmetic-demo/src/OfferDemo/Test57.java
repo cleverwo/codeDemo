@@ -28,7 +28,7 @@ public class Test57 {
      * @param pNode
      * @return
      */
-    ArrayList<TreeLinkNode> list = new ArrayList<>();
+
     public TreeLinkNode GetNext(TreeLinkNode pNode){
         if (pNode == null){
             return null;
@@ -62,6 +62,7 @@ public class Test57 {
      * 在查他的父节点，如果他是父节点的左孩子，那就是父节点，如果他是父节点的右孩子，则找他父节点的父节点，
      * 他父节点是父节点的父节点的左孩子，则继续找，不是返回null
      */
+    ArrayList<TreeLinkNode> list = new ArrayList<>();
     public TreeLinkNode GetNext1(TreeLinkNode pNode){
         if (pNode == null){
             return null;

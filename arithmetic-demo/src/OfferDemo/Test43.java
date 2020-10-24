@@ -14,7 +14,7 @@ public class Test43 {
 
     /**
      * 思路：
-     * 左移动就是移位
+     * 左旋转就是移位
      * @param str
      * @param n
      * @return
@@ -28,6 +28,14 @@ public class Test43 {
         StringBuffer stringBuffer = new StringBuffer(str.substring(left));
         stringBuffer.append(remove);
         return new String(stringBuffer);
+    }
+
+    // 利用余运算
+    public String reverseLeftWords(String s, int n) {
+        StringBuilder res = new StringBuilder();
+        for(int i = n; i < n + s.length(); i++)
+            res.append(s.charAt(i % s.length()));
+        return res.toString();
     }
 
     public static void main(String[] args) {
