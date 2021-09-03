@@ -76,4 +76,11 @@ public class Test22 {
             dfs2(n+1,mark);
         }
     }
+
+    public boolean getResult(String str){
+        String regex = "^([1-9]*[a-zA-Z]*)*$";
+        String a = "[1-9]\\d*[a-z]";
+        boolean s = str.matches(regex);
+        return s;
+    }
 }
