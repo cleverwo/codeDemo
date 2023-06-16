@@ -6,7 +6,12 @@ package com.example;
  * @Description:
  */
 public class ClassA {
-    public static void a(){}
-    public final void b(){}
-    private void c(){}
+    public static void a() {
+    }
+
+    public final void b() {
+    }
+
+    protected void c() {
+    }
 }
